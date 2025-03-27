@@ -1,0 +1,71 @@
+.container {
+    padding: 20px;
+    background-color: #ffffff; /* Fondo blanco */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    margin: 20px auto; /* Centrar el contenedor */
+    max-width: 800px; /* Ancho máximo del contenedor */
+  }
+  
+  h1 {
+    text-align: center;
+    color: #1f6feb; /* Color azul para el título */
+    margin-bottom: 20px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    border-radius: 10px; /* Bordes redondeados para la tabla */
+    overflow: hidden; /* Para que los bordes redondeados se apliquen a las celdas */
+  }
+  
+  table, th, td {
+    border: 1px solid #1f6feb;
+  }
+  
+  th, td {
+    padding: 12px; /* Espaciado más cómodo */
+    text-align: left;
+    color: #333333; /* Color de texto más oscuro */
+  }
+  
+  th {
+    background: #1f6feb;
+    color: #ffffff;
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: #f2f2f2; /* Fondo gris claro para filas pares */
+  }
+  
+  tbody tr:nth-child(odd) {
+    background-color: #ffffff; /* Fondo blanco para filas impares */
+  }
+  
+  tbody tr:hover {
+    background-color: #e0f3ff; /* Fondo azul claro en hover */
+    color: #333333;
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  
+  button {
+    background: #1f6feb;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+  }
+  
+  button:hover {
+    background: #3b82f6;
+    transform: translateY(-2px); /* Efecto de elevación en hover */
+  }

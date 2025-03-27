@@ -1,0 +1,61 @@
+<div class="container">
+    <h1>Gestión de Promociones</h1>
+  
+    <div class="form-container">
+      <form (ngSubmit)="onSubmit()" #promoForm="ngForm">
+        <input type="hidden" [(ngModel)]="promocion.id" name="id">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" [(ngModel)]="promocion.nombre" name="nombre" required>
+        </div>
+        <div class="form-group">
+          <label for="descripcion">Descripción</label>
+          <textarea id="descripcion" [(ngModel)]="promocion.descripcion" name="descripcion" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="fechaInicio">Fecha de Inicio</label>
+          <input type="date" id="fechaInicio" [(ngModel)]="promocion.fechaInicio" name="fechaInicio" required>
+        </div>
+        <div class="form-group">
+          <label for="fechaFin">Fecha de Fin</label>
+          <input type="date" id="fechaFin" [(ngModel)]="promocion.fechaFin" name="fechaFin" required>
+        </div>
+        <div class="form-group">
+          <label for="tipo">Tipo de Promoción</label>
+          <select id="tipo" [(ngModel)]="promocion.tipo" name="tipo" required>
+            <option value="general">General</option>
+            <option value="clientes">Para Clientes</option>
+          </select>
+        </div>
+        <button type="submit" class="add-update-button">{{ promocion.id ? 'Actualizar' : 'Agregar' }} Promoción</button>
+      </form>
+    </div>
+  <br>
+  <br>
+    <h2>Lista de Promociones</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Fecha de Inicio</th>
+          <th>Fecha de Fin</th>
+          <th>Tipo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let promo of promociones">
+          <td>{{ promo.nombre }}</td>
+          <td>{{ promo.descripcion }}</td>
+          <td>{{ promo.fechaInicio }}</td>
+          <td>{{ promo.fechaFin }}</td>
+          <td>{{ promo.tipo }}</td>
+          <td class="actions">
+            <button (click)="editarPromocion(promo)">Editar</button>
+            <button class="delete-button" (click)="eliminarPromocion(promo.id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

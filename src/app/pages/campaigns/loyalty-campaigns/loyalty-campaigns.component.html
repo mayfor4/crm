@@ -1,0 +1,25 @@
+<div class="container">
+    <h1>Listado de Clientes Frecuentes</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Edad</th>
+          <th>Correo</th>
+          <th>Número de Teléfono</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cliente of clientes">
+            <td>{{ cliente.nombre }}</td>
+            <td>{{ cliente.edad }}</td>
+            <td>{{ cliente.correo }}</td>
+            <td>{{ cliente.numero }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="buttons">
+      <button (click)="createCampaign('whatsapp')">Crear Campaña WhatsApp</button>
+      <button (click)="createCampaign('email')">Crear Campaña Correo</button>
+    </div>
+  </div>
