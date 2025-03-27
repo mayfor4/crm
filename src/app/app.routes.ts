@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { AccountsComponent } from './pages/accounts/accounts.component';
 import { CampaignsComponent } from './pages/campaigns/campaigns.component';
-import { ContactsComponent } from './pages/contacts/contacts.component';
+import { ClientsComponent } from './pages/clients/clients.component';
 import { EmailComponent } from './pages/email/email.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SubformsComponent } from './pages/subforms/subforms.component';
@@ -32,8 +32,8 @@ export const routes: Routes = [
     component: LoyaltyCampaignsComponent,
   },
   {
-    path: 'contacts',
-    component: ContactsComponent,
+    path: 'clients',
+    component: ClientsComponent,
   },
   {
     path: 'email',
