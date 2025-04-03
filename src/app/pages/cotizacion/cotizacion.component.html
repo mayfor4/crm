@@ -1,0 +1,111 @@
+<div class="cotizacion-container">
+    <h2>Selecciona un tipo de cotización</h2>
+  
+    <div class="cotizacion-tabs">
+      <button 
+        [class.active]="tipoSeleccionado === 'bebidas'" 
+        (click)="seleccionarTipo('bebidas')">
+        Suministro de Bebidas
+      </button>
+      <button 
+        [class.active]="tipoSeleccionado === 'artistas'" 
+        (click)="seleccionarTipo('artistas')">
+        Contratación de Artistas
+      </button>
+    </div>
+  
+    @if (tipoSeleccionado === 'bebidas') {
+      <div class="cotizacion-form">
+        <h3>Cotización de Suministro de Bebidas</h3>
+        <form>
+          <label>Proveedor*</label>
+          <select required>
+            <option value="" disabled selected>Seleccione un proveedor</option>
+            <option value="cask">CASK</option>
+            <option value="elite">Elite Drinks</option>
+            <option value="premium">Premium Spirits</option>
+          </select>
+  
+          <label>Tipo de Producto*</label>
+          <select required>
+            <option value="" disabled selected>Seleccione un tipo</option>
+            <option value="lotes">Lotes de botellas</option>
+            <option value="paquetes">Paquetes promocionales</option>
+            <option value="descuentos">Descuentos por volumen</option>
+          </select>
+  
+          <label>Cantidad*</label>
+          <input type="number" placeholder="Cantidad" required>
+  
+          <label>Ubicación del evento*</label>
+          <input type="text" placeholder="Ejemplo: Salón XYZ, CDMX" required>
+  
+          <label>Horario del evento*</label>
+          <input type="time" required>
+  
+          <label>Servicios Adicionales</label>
+          <div class="servicios-adicionales">
+            <label><input type="checkbox"> Renta de equipo de sonido</label>
+            <label><input type="checkbox"> Iluminación profesional</label>
+            <label><input type="checkbox"> Seguridad privada</label>
+            <label><input type="checkbox"> Catering especializado</label>
+            <label><input type="checkbox"> Meseros y servicio de bar</label>
+            <label><input type="checkbox"> Transportación y logística</label>
+          </div>
+  
+          <label>Observaciones</label>
+          <textarea placeholder="Detalles adicionales..."></textarea>
+  
+          <button type="submit">Solicitar Cotización</button>
+        </form>
+      </div>
+    }
+  
+    @if (tipoSeleccionado === 'artistas') {
+      <div class="cotizacion-form">
+        <h3>Cotización de Contratación de Artistas</h3>
+        <form>
+          <label>Proveedor*</label>
+          <select required>
+            <option value="" disabled selected>Seleccione un proveedor</option>
+            <option value="armusic">ARMusic</option>
+            <option value="bushido">Bushido Entretenimiento</option>
+            <option value="capetillo">Capetillo Producciones</option>
+          </select>
+  
+          <label>Tipo de Servicio*</label>
+          <select required>
+            <option value="" disabled selected>Seleccione un tipo</option>
+            <option value="dj">DJ</option>
+            <option value="banda">Banda en vivo</option>
+            <option value="espectaculo">Espectáculo en vivo</option>
+          </select>
+  
+          <label>Presupuesto*</label>
+          <input type="number" placeholder="Ingrese su presupuesto" required>
+  
+          <label>Disponibilidad*</label>
+          <input type="date" required>
+  
+          <label>Ubicación del evento*</label>
+          <input type="text" placeholder="Ejemplo: Teatro Nacional, CDMX" required>
+  
+          <label>Servicios Adicionales</label>
+          <div class="servicios-adicionales">
+            <label><input type="checkbox"> Renta de equipo de sonido</label>
+            <label><input type="checkbox"> Iluminación profesional</label>
+            <label><input type="checkbox"> Seguridad privada</label>
+            <label><input type="checkbox"> Catering especializado</label>
+            <label><input type="checkbox"> Escenografía y efectos especiales</label>
+            <label><input type="checkbox"> Producción audiovisual</label>
+          </div>
+  
+          <label>Observaciones</label>
+          <textarea placeholder="Detalles adicionales..."></textarea>
+  
+          <button type="submit">Solicitar Cotización</button>
+        </form>
+      </div>
+    }
+  </div>
+  

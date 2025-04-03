@@ -86,8 +86,4 @@
   .pendiente { color: orange; font-weight: bold; }
   .finalizada { color: red; font-weight: bold; }
   
-  /*  títulos */
-  h3, h4 {
-    margin-top: 0;
-    margin-bottom: 15px;
-  }
+ 
