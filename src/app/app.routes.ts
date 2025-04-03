@@ -9,7 +9,7 @@ import { MenuComponent } from './pages/menu/menu.component';
 import { LoyaltyCampaignsComponent } from './pages/campaigns/loyalty-campaigns/loyalty-campaigns.component';
 import { PromotionsComponent } from './pages/campaigns/promotions/promotions.component';
 import { EventsComponent } from './pages/events/events.component';
-
+import { CotizacionComponent } from './pages/cotizacion/cotizacion.component';
 export const routes: Routes = [
   {
     path: 'home',
@@ -47,6 +47,11 @@ export const routes: Routes = [
     path: 'subforms',
     component: SubformsComponent,
   },
+  {
+    path: 'cotizacion',
+    component: CotizacionComponent,
+  },
+
 
   {
     path: '**',
