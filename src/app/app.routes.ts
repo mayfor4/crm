@@ -5,10 +5,11 @@ import { ClientsComponent } from './pages/clients/clients.component';
 import { EmailComponent } from './pages/email/email.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SubformsComponent } from './pages/subforms/subforms.component';
-import { MenuComponent } from './pages/menu/menu.component';
 import { LoyaltyCampaignsComponent } from './pages/campaigns/loyalty-campaigns/loyalty-campaigns.component';
 import { PromotionsComponent } from './pages/campaigns/promotions/promotions.component';
 import { EventsComponent } from './pages/events/events.component';
+import { EventInsertComponent } from './pages/event-states/event-insert/event-insert.component';
+import { EventUpdateComponent } from './pages/event-states/event-update/event-update.component';
 
 export const routes: Routes = [
   {
@@ -44,10 +45,17 @@ export const routes: Routes = [
     component: EventsComponent,
   },
   {
+    path: 'event-insert',
+    component: EventInsertComponent
+  },
+  {
+    path: 'event-update/:id',
+    component: EventUpdateComponent
+  },
+  {
     path: 'subforms',
     component: SubformsComponent,
   },
-
   {
     path: '**',
     redirectTo: 'home',

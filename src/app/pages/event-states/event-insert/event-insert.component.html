@@ -1,0 +1,100 @@
+<div class="form-container">
+  <h2 class="form-title">Agregar Nuevo Evento</h2>
+  <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+    <div class="form-grid">
+      <!-- Columna Izquierda -->
+      <div class="form-column">
+        <div class="form-group">
+          <label for="nombre">Nombre del Evento</label>
+          <input id="nombre" type="text" formControlName="nombre" 
+                 [ngClass]="{'invalid': eventForm.get('nombre')?.invalid && eventForm.get('nombre')?.touched}"
+                 placeholder="Ej: Conferencia anual">
+          <div class="error-message" *ngIf="eventForm.get('nombre')?.invalid && eventForm.get('nombre')?.touched">
+            El nombre es requerido
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="estado">Estado</label>
+          <select id="estado" formControlName="estado"
+                  [ngClass]="{'invalid': eventForm.get('estado')?.invalid && eventForm.get('estado')?.touched}">
+            <option value="" disabled selected>Seleccione un estado</option>
+            <option *ngFor="let estado of estados" [value]="estado">{{ estado }}</option>
+          </select>
+          <div class="error-message" *ngIf="eventForm.get('estado')?.invalid && eventForm.get('estado')?.touched">
+            Debe seleccionar un estado
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="tipo">Tipo de Evento</label>
+          <input id="tipo" type="text" formControlName="tipo"
+                 [ngClass]="{'invalid': eventForm.get('tipo')?.invalid && eventForm.get('tipo')?.touched}"
+                 placeholder="Ej: Conferencia, Taller, Reunión">
+          <div class="error-message" *ngIf="eventForm.get('tipo')?.invalid && eventForm.get('tipo')?.touched">
+            El tipo es requerido
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna Derecha -->
+      <div class="form-column">
+        <div class="form-group">
+          <label>Fecha y Hora de Inicio</label>
+          <input type="datetime-local" formControlName="inicio"
+                 [ngClass]="{'invalid': eventForm.get('inicio')?.invalid && eventForm.get('inicio')?.touched}">
+          <div class="error-message" *ngIf="eventForm.get('inicio')?.invalid && eventForm.get('inicio')?.touched">
+            Fecha inválida
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Fecha y Hora de Finalización</label>
+          <input type="datetime-local" formControlName="final"
+                 [ngClass]="{'invalid': eventForm.get('final')?.invalid && eventForm.get('final')?.touched}">
+          <div class="error-message" *ngIf="eventForm.get('final')?.invalid && eventForm.get('final')?.touched">
+            Fecha inválida o anterior a inicio
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="participantes">Participantes</label>
+          <input id="participantes" type="number" formControlName="participantes" min="0"
+                 [ngClass]="{'invalid': eventForm.get('participantes')?.invalid && eventForm.get('participantes')?.touched}">
+          <div class="error-message" *ngIf="eventForm.get('participantes')?.invalid && eventForm.get('participantes')?.touched">
+            Número inválido
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sección de estadísticas -->
+    <div class="stats-section">
+      <h3>Estadísticas de Participación</h3>
+      <div class="stats-grid">
+        <div class="form-group">
+          <label for="confirmados">Confirmados</label>
+          <input id="confirmados" type="number" formControlName="confirmados" min="0">
+        </div>
+        <div class="form-group">
+          <label for="participaciones">Participaciones</label>
+          <input id="participaciones" type="number" formControlName="participaciones" min="0">
+        </div>
+        <div class="form-group">
+          <label for="noParticipaciones">No Participaciones</label>
+          <input id="noParticipaciones" type="number" formControlName="noParticipaciones" min="0">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-cancel" (click)="cancel()">
+        <i class="fas fa-times"></i> Cancelar
+      </button>
+      <button type="submit" class="btn btn-submit" [disabled]="eventForm.invalid || isSubmitting">
+        <i class="fas fa-save"></i> 
+        {{ isSubmitting ? 'Guardando...' : 'Guardar Evento' }}
+      </button>
+    </div>
+  </form>
+</div>

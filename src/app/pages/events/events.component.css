@@ -1,0 +1,126 @@
+/* Estilos generales */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 20px;
+}
+
+/* Encabezado */
+.header-events {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #007bff;
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.header-title {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.btn-primary {
+  background-color: #0056b3;
+  border: none;
+  padding: 10px 15px;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #004494;
+}
+
+/* Tabla de eventos */
+.table-responsive {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.table th, .table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.table thead {
+  background-color: #007bff;
+  color: white;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Estilos para las etiquetas de estado */
+.badge {
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.badge-success {
+  background-color: #28a745;
+  color: white;
+}
+
+.badge-warning {
+  background-color: #ffc107;
+  color: black;
+}
+
+.badge-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.badge-purple {
+  background-color: #6c3483;
+  color: white;
+}
+
+/* Botón de detalles */
+.btn-sm {
+  font-size: 0.875rem;
+  padding: 5px 10px;
+}
+
+/* Contenedor de detalles */
+.detalles-container {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-left: 4px solid #007bff;
+  border-radius: 5px;
+}
+
+.detalles-container p {
+  margin: 5px 0;
+  font-size: 0.95rem;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .header-events {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .table {
+    font-size: 0.875rem;
+  }
+}
