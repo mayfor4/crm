@@ -1,1 +1,47 @@
-<p>home works!</p>
+<div class="dashboard">
+    <!-- izqui -->
+    <div class="lado-izquierdo">
+      <div class="card azul">
+        <h4>Ingresos</h4>
+        <p>${{ indicadores.ingresos | number }}</p>
+      </div>
+      <div class="card azul">
+        <h4>Ocupación del Salón</h4>
+        <p>{{ indicadores.ocupacionSalon }}%</p>
+      </div>
+      <div class="card naranja">
+        <h4>Clientes Recurrentes</h4>
+        <p>{{ indicadores.clientesRecurrentes }}</p>
+      </div>
+      <div class="card naranja">
+        <h4>Nuevos Registros</h4>
+        <p>{{ indicadores.nuevosRegistros }}</p>
+      </div>
+    </div>
+  
+    <!-- los graf que estan derecha  -->
+    <div class="lado-derecho">
+      <div class="fila-graficos">
+        <div class="grafico">
+          <h3>Estado de Eventos y Fidelización</h3>
+          <canvas id="graficoEventos"></canvas>
+        </div>
+        <div class="grafico">
+          <h3>Ventas Mensuales y Fidelización</h3>
+          <canvas id="graficoVentas"></canvas>
+        </div>
+      </div>
+  
+      <!-- El de promo -->
+      <div class="promociones">
+        <h3>Promociones en Curso</h3>
+        <ul>
+          <li *ngFor="let promo of promociones">
+            <strong>{{ promo.nombre }}</strong> - 
+            <span [ngClass]="promo.estado.toLowerCase()">{{ promo.estado }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  

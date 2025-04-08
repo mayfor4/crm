@@ -10,6 +10,7 @@ import { PromotionsComponent } from './pages/campaigns/promotions/promotions.com
 import { EventsComponent } from './pages/events/events.component';
 import { EventInsertComponent } from './pages/event-states/event-insert/event-insert.component';
 import { EventUpdateComponent } from './pages/event-states/event-update/event-update.component';
+import { CotizacionComponent } from './pages/cotizacion/cotizacion.component';
 
 export const routes: Routes = [
   {
@@ -55,6 +56,10 @@ export const routes: Routes = [
   {
     path: 'subforms',
     component: SubformsComponent,
+  },
+  {
+    path: 'cotizacion',
+    component: CotizacionComponent,
   },
   {
     path: '**',
