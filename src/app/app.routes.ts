@@ -10,6 +10,7 @@ import { LoyaltyCampaignsComponent } from './pages/campaigns/loyalty-campaigns/l
 import { PromotionsComponent } from './pages/campaigns/promotions/promotions.component';
 import { EventsComponent } from './pages/events/events.component';
 import { CotizacionComponent } from './pages/cotizacion/cotizacion.component';
+import { MensajeriaComponent } from './pages/mensajeria/mensajeria.component';
 export const routes: Routes = [
   {
     path: 'home',
@@ -51,6 +52,11 @@ export const routes: Routes = [
     path: 'cotizacion',
     component: CotizacionComponent,
   },
+  {
+    path: 'mensajeria',
+    component: MensajeriaComponent,
+  },
+
 
 
   {

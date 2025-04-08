@@ -1,0 +1,56 @@
+<div class="mensajeria-container">
+    <div class="sidebar">
+      <h3>Empleados</h3>
+      <ul>
+        @for (emp of empleados; track emp) {
+          @if (emp !== usuarioActual) {
+            <li
+              [class.activo]="emp === receptorSeleccionado"
+              (click)="receptorSeleccionado = emp"
+            >
+              🟢 {{ emp }}
+            </li>
+          }
+        }
+      </ul>
+    </div>
+  
+    <div class="chat-area">
+      <div class="chat-header">
+        <h3>Conversación con {{ receptorSeleccionado }}</h3>
+      </div>
+  
+      <div class="mensajes-chat">
+        @for (msg of obtenerConversacion(); track msg) {
+          @let index = obtenerConversacion().indexOf(msg);
+          @let fechaAnterior = index > 0 ? obtenerConversacion()[index - 1].fecha : undefined;
+      
+          @if (index === 0 || (fechaAnterior && obtenerFechaFormateada(msg.fecha) !== obtenerFechaFormateada(fechaAnterior))) {
+            <div class="fecha">{{ obtenerFechaFormateada(msg.fecha) }}</div>
+          }
+      
+          <div class="mensaje" [class.propio]="msg.emisor === usuarioActual">
+            <div class="contenido">{{ msg.contenido }}</div>
+            <div class="detalles">
+              <span>{{ msg.emisor === usuarioActual ? 'Tú' : msg.emisor }}</span>
+              <span class="hora">{{ msg.fecha | date: 'shortTime' }}</span>
+            </div>
+          </div>
+        }
+      
+        @if (obtenerConversacion().length === 0) {
+          <div class="sin-mensajes">No hay mensajes aún.</div>
+        }
+      </div>
+      
+  
+      <div class="formulario">
+        <textarea
+          [(ngModel)]="nuevoMensaje"
+          placeholder="Escribe un mensaje..."
+        ></textarea>
+        <button (click)="enviarMensaje()">Enviar</button>
+      </div>
+    </div>
+  </div>
+  
