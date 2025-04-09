@@ -44,7 +44,7 @@
           </label>
           <input id="meta" type="text" formControlName="meta" 
                  [class.invalid]="eventForm.get('meta')?.invalid && eventForm.get('meta')?.touched"
-                 placeholder="Ej: Ganar dinero">
+                 placeholder="Ej: Generar ingresos">
           <div class="validation-message" *ngIf="eventForm.get('meta')?.invalid && eventForm.get('meta')?.touched">
             <i class="fas fa-exclamation-circle"></i> Este campo es obligatorio
           </div>
@@ -56,7 +56,7 @@
           </label>
           <input id="estrategia" type="text" formControlName="estrategia"
                  [class.invalid]="eventForm.get('estrategia')?.invalid && eventForm.get('estrategia')?.touched"
-                 placeholder="Ej: Cambiar despues">
+                 placeholder="Ej: Estrategia">
           <div class="validation-message" *ngIf="eventForm.get('estrategia')?.invalid && eventForm.get('estrategia')?.touched">
             <i class="fas fa-exclamation-circle"></i> Especifique la estrategia
           </div>
