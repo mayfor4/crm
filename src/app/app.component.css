@@ -2,3 +2,19 @@
   margin-left: 250px; /* Igual al ancho de tu sidebar */
   padding: 20px;
 }
+.header-container {
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.967); 
+  padding: 10px 0;
+  z-index: 100; /* Asegura que esté por encima del contenido */
+}
+
+.company-logo {
+  height: 55px; /* Ajusta según necesites */
+  margin-left: 255px; /* Espacio entre el menú y el logo */
+}
+
+.content {
+  clear: both; /* Asegura que el contenido empiece debajo */
+  padding: 20px;
+}

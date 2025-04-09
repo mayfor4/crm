@@ -16,3 +16,10 @@ export class EventModel {
     ingresoEsperado!: number;
     ingresoObtenido!: number;
 }
+export class MensajeModel{
+    id!: string;
+  emisor!: string;
+  receptor!: string;
+  contenido!: string;
+  fecha!: string;
+}

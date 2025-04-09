@@ -1,1 +1,40 @@
-<p>email works!</p>
+<div class="notification-wrapper">
+    <div class="header" (click)="toggleNotifications()">
+      <h2>Notificaciones de Email</h2>
+      <fa-icon [icon]="showNotifications ? faChevronUp : faChevronDown"></fa-icon>
+    </div>
+  
+    @if (showNotifications) {
+      <div class="notification-list">
+        @for (notification of notifications; track notification) {
+          <div class="notification-card {{notification.type}}">
+            <div class="notification-title">{{notification.title}}</div>
+  
+            <div class="notification-section">
+              <label>Sujeto:</label>
+              <span>{{notification.subject}}</span>
+            </div>
+  
+            @if (notification.campaign) {
+              <div class="notification-section">
+                <label>Campaña:</label>
+                <a href="#">{{notification.campaign}}</a>
+              </div>
+            }
+  
+            <div class="meta-data">
+              <div>
+                <label>Destinatarios</label>
+                <span>{{notification.recipients}}</span>
+              </div>
+              <div>
+                <label>Categoría</label>
+                <span>{{notification.category}}</span>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+  

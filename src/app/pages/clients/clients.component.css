@@ -1,140 +1,104 @@
-.form-container {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 16px;
-  background: #f4f4f4;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
 
-form {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 10px;
-}
 
-input, select, button {
-  padding: 8px;
-  font-size: 14px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-button {
-  grid-column: span 2;
-  background-color: #ff0000;
-  color: white;
-  cursor: pointer;
-  border: none;
-  border-radius: 8px;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.4);
-}
-
-button:hover {
-  background-color: #9b3535;
-  box-shadow: 0 4px 6px rgba(0, 86, 179, 0.4);
-}
-
-.btn-editar {
-  grid-column: span 2;
- background-color: #007bff;
- color: white;
- cursor: pointer;
- border: none;
- border-radius: 8px;
- transition: background-color 0.3s ease, box-shadow 0.3s ease;
- box-shadow: 0 2px 4px rgba(0, 123, 255, 0.4);
-}
-
-.btn-editar:hover {
- background-color: #0056b3;
- box-shadow: 0 4px 6px rgba(0, 86, 179, 0.4);
-}
-
-.btn-eliminar {
-  background-color: #dc3545; /* rojo */
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 12px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 2px 4px rgba(220, 53, 69, 0.4);
-}
-
-.btn-eliminar:hover {
-  background-color: #c82333;
-  box-shadow: 0 4px 6px rgba(200, 35, 51, 0.4);
+.clientes-container {
+  padding: 1.5rem;
+  font-family: 'Inter', sans-serif;
+  background: #f4f6f8;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+  overflow-x: auto;
 }
 
 .table-container {
-  max-width: 100%;
   overflow-x: auto;
-  margin: 20px auto;
-  border-radius: 10px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
-table {
+.styled-table {
   width: 100%;
-  border-collapse: collapse;
-  background-color: white;
-  font-size: 14px;
-  border-radius: 8px;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: #ffffff;
+  border-radius: 12px;
   overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
-th, td {
-  padding: 12px;
-  border: 1px solid #ddd;
+.styled-table th {
+  background-color: #ffdd00e4;
+
+  padding: 14px;
+  font-weight: 600;
   text-align: left;
 }
 
-thead {
-  background-color: #e6f0ff;
+.styled-table td {
+  padding: 14px;
+  color: #333;
+  vertical-align: top;
+  font-size: 0.95rem;
+  font-weight: 400;
+  border-bottom: 1px solid #eaeaea;
 }
 
-/* Extra styles */
-form input,
-form select,
-form button {
-  margin: 5px 0;
-  padding: 8px;
-  display: block;
-  width: 100%;
-  max-width: 400px;
+.styled-table tbody tr:hover {
+  background-color: #f0f8ff;
+  transition: background 0.25s ease;
 }
 
-button {
-  margin-right: 5px;
-  padding: 6px 10px;
-  cursor: pointer;
+.direccion-cell {
+  white-space: pre-line;
+  max-width: 180px;
+  line-height: 1.4;
 }
 
 .lealtad-alta {
-  color: green;
-  font-weight: bold;
+  color: #2ecc71;
+  font-weight: 600;
 }
-
 .lealtad-media {
-  color: orange;
-  font-weight: bold;
+  color: #f39c12;
+  font-weight: 600;
+}
+.lealtad-baja {
+  color: #e74c3c;
+  font-weight: 600;
 }
 
-.lealtad-baja {
-  color: red;
-  font-weight: bold;
+.btn-icon {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-right: 6px;
+  transition: transform 0.2s ease;
+}
+
+.btn-icon:hover {
+  transform: scale(1.1);
+}
+
+.editar fa-icon {
+  color: #3498db;
+}
+.eliminar fa-icon {
+  color: #e74c3c;
 }
 
 ul {
+  padding-left: 18px;
   margin: 0;
-  padding-left: 20px;
+}
+
+@media (max-width: 768px) {
+  .styled-table th, .styled-table td {
+    padding: 10px;
+    font-size: 0.85rem;
+  }
 }
 
 
 
-
+/*aqui inicia el diseño de formulario para registrar cliente*/
 /* Botón flotante */
 .add-button {
   background-color: #0d6efd;
@@ -147,6 +111,12 @@ ul {
   font-size: 14px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   transition: background-color 0.3s ease;
+}
+
+.form-modal {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
 }
 
 .add-button:hover {
@@ -258,4 +228,21 @@ ul {
 
 .form-buttons button[type="button"]:hover {
   background-color: #e0e0e0;
+}
+
+
+.close-button {
+  grid-column: span 2;
+  background-color: #ff0000;
+  color: white;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.4);
+}
+
+.close-button:hover {
+  background-color: #9b3535;
+  box-shadow: 0 4px 6px rgba(0, 86, 179, 0.4);
 }
