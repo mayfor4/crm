@@ -36,7 +36,7 @@ export class HomeComponent implements AfterViewInit {
       data: {
         labels: ['Eventos Activos', 'Eventos Finalizados', 'Fidelización Activa'],
         datasets: [{
-          data: [50, 30, 20], // 📌 Datos simulados
+          data: [50, 30, 20], //Datos simulados
           backgroundColor: ['#ff5733', '#33c4ff', '#33ff57']
         }]
       }

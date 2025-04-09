@@ -1,0 +1,206 @@
+<div class="event-form-container">
+  <div class="form-header">
+    <div class="form-icon">
+      <i class="fas fa-calendar-plus"></i>
+    </div>
+    <h1>Crear Nuevo Evento</h1>
+    <p>Complete todos los campos para registrar un nuevo evento</p>
+  </div>
+
+  <form [formGroup]="eventForm" (ngSubmit)="onSubmit()" class="event-form">
+    <div class="form-body">
+      <!-- Primera fila -->
+      <div class="form-row">
+        <div class="form-field">
+          <label for="nombre">
+            <i class="fas fa-heading"></i> Nombre del Evento
+          </label>
+          <input id="nombre" type="text" formControlName="nombre" 
+                 [class.invalid]="eventForm.get('nombre')?.invalid && eventForm.get('nombre')?.touched"
+                 placeholder="Ej: Conferencia anual de tecnología">
+          <div class="validation-message" *ngIf="eventForm.get('nombre')?.invalid && eventForm.get('nombre')?.touched">
+            <i class="fas fa-exclamation-circle"></i> Este campo es obligatorio
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="tipo">
+            <i class="fas fa-tag"></i> Tipo de Evento
+          </label>
+          <input id="tipo" type="text" formControlName="tipo"
+                 [class.invalid]="eventForm.get('tipo')?.invalid && eventForm.get('tipo')?.touched"
+                 placeholder="Ej: Conferencia, Taller, Reunión">
+          <div class="validation-message" *ngIf="eventForm.get('tipo')?.invalid && eventForm.get('tipo')?.touched">
+            <i class="fas fa-exclamation-circle"></i> Especifique el tipo de evento
+          </div>
+        </div>
+      </div>
+
+      <!-- Segunda fila -->
+      <div class="form-row">
+        <div class="form-field">
+          <label for="meta">
+            <i class="fas fa-bullseye"></i> Meta
+          </label>
+          <input id="meta" type="text" formControlName="meta" 
+                 [class.invalid]="eventForm.get('meta')?.invalid && eventForm.get('meta')?.touched"
+                 placeholder="Ej: Ganar dinero">
+          <div class="validation-message" *ngIf="eventForm.get('meta')?.invalid && eventForm.get('meta')?.touched">
+            <i class="fas fa-exclamation-circle"></i> Este campo es obligatorio
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="estrategia">
+            <i class="fas fa-chart-simple"></i> Estrategia
+          </label>
+          <input id="estrategia" type="text" formControlName="estrategia"
+                 [class.invalid]="eventForm.get('estrategia')?.invalid && eventForm.get('estrategia')?.touched"
+                 placeholder="Ej: Cambiar despues">
+          <div class="validation-message" *ngIf="eventForm.get('estrategia')?.invalid && eventForm.get('estrategia')?.touched">
+            <i class="fas fa-exclamation-circle"></i> Especifique la estrategia
+          </div>
+        </div>
+      </div>
+
+      <!-- Tercera fila -->
+      <div class="form-row">
+        <div class="form-field">
+          <label for="estado">
+            <i class="fas fa-info-circle"></i> Estado
+          </label>
+          <div class="select-wrapper">
+            <select id="estado" formControlName="estado"
+                    [class.invalid]="eventForm.get('estado')?.invalid && eventForm.get('estado')?.touched">
+              <option value="" disabled selected>Seleccione un estado</option>
+              <option *ngFor="let estado of estados" [value]="estado">{{ estado }}</option>
+            </select>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="validation-message" *ngIf="eventForm.get('estado')?.invalid && eventForm.get('estado')?.touched">
+            <i class="fas fa-exclamation-circle"></i> Seleccione un estado válido
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="participantes">
+            <i class="fas fa-users"></i> Aforo
+          </label>
+          <input id="participantes" type="number" formControlName="participantes" min="0"
+                 [class.invalid]="eventForm.get('participantes')?.invalid && eventForm.get('participantes')?.touched">
+          <div class="validation-message" *ngIf="eventForm.get('participantes')?.invalid && eventForm.get('participantes')?.touched">
+            <i class="fas fa-exclamation-circle"></i> Ingrese un número válido
+          </div>
+        </div>
+      </div>
+
+      <!-- Cuarta fila - Fechas -->
+      <div class="form-row">
+        <div class="form-field">
+          <label>
+            <i class="far fa-calendar-alt"></i> Fecha y Hora de Inicio
+          </label>
+          <div class="datetime-wrapper">
+            <input type="datetime-local" formControlName="inicio"
+                   [class.invalid]="eventForm.get('inicio')?.invalid && eventForm.get('inicio')?.touched">
+          </div>
+          <div class="validation-message" *ngIf="eventForm.get('inicio')?.invalid && eventForm.get('inicio')?.touched">
+            <i class="fas fa-exclamation-circle"></i> Fecha inválida
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label>
+            <i class="far fa-calendar-alt"></i> Fecha y Hora de Finalización
+          </label>
+          <div class="datetime-wrapper">
+            <input type="datetime-local" formControlName="final"
+                   [class.invalid]="eventForm.get('final')?.invalid && eventForm.get('final')?.touched">
+          </div>
+          <div class="validation-message" *ngIf="eventForm.get('final')?.invalid && eventForm.get('final')?.touched">
+            <i class="fas fa-exclamation-circle"></i> Fecha debe ser posterior al inicio
+          </div>
+        </div>
+      </div>
+
+
+      <div class="money-section">
+        <h3><i class="fas fa-chart-bar"></i> Presupuestos e Ingresos</h3>
+        <div class="money-grid">
+          <div class="money-card">
+            <label for="prespuestoEsperado">Presupuesto Esperado</label>
+            <div class="money-input">
+              <input id="presupuestoEsperado" type="number" formControlName="presupuestoEsperado" min="0">
+              <span class="money-icon"><i class="fas fa-file-invoice-dollar"></i></span>
+            </div>
+          </div>
+          
+          <div class="money-card">
+            <label for="costoReal">Costo Real</label>
+            <div class="money-input">
+              <input id="costoReal" type="number" formControlName="costoReal" min="0">
+              <span class="money-icon"><i class="fas fa-file-invoice-dollar"></i></span>
+            </div>
+          </div>
+
+          <div class="money-card">
+            <label for="ingresoEsperado">Ingreso Esperado</label>
+            <div class="money-input">
+              <input id="ingresoEsperado" type="number" formControlName="ingresoEsperado" min="0">
+              <span class="money-icon"><i class="fas fa-money-bills"></i></span>
+            </div>
+          </div>
+          
+          <div class="money-card">
+            <label for="ingresoObtenido">Ingreso Obtenido</label>
+            <div class="money-input">
+              <input id="ingresoObtenido" type="number" formControlName="ingresoObtenido" min="0">
+              <span class="money-icon"><i class="fas fa-money-bills"></i></span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Sección de estadísticas -->
+      <div class="stats-section">
+        <h3><i class="fas fa-chart-bar"></i> Participación</h3>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <label for="confirmados">Confirmados</label>
+            <div class="stat-input">
+              <input id="confirmados" type="number" formControlName="confirmados" min="0">
+              <span class="stat-icon"><i class="fas fa-hand-paper"></i></span>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <label for="participaciones">Participaciones</label>
+            <div class="stat-input">
+              <input id="participaciones" type="number" formControlName="participaciones" min="0">
+              <span class="stat-icon"><i class="fas fa-user-check"></i></span>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <label for="noParticipaciones">No Participaciones</label>
+            <div class="stat-input">
+              <input id="noParticipaciones" type="number" formControlName="noParticipaciones" min="0">
+              <span class="stat-icon"><i class="fas fa-user-times"></i></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-footer">
+      <button type="button" class="cancel-btn" (click)="cancel()">
+        <i class="fas fa-times"></i> Cancelar
+      </button>
+      <button type="submit" class="submit-btn" [disabled]="eventForm.invalid || isSubmitting">
+        <i class="fas" [class.fa-spinner]="isSubmitting" [class.fa-save]="!isSubmitting"></i>
+        {{ isSubmitting ? 'Guardando...' : 'Guardar Evento' }}
+      </button>
+    </div>
+  </form>
+</div>

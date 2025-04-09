@@ -1,1 +1,202 @@
-<p>events works!</p>
+<div class="header-container">
+  <div class="header-content">
+    <div class="title-section">
+      <h1><i class="fas fa-calendar-alt"></i> Gestión de Eventos</h1>
+    </div>
+    
+    <div class="actions-section">
+      <div class="search-container">
+        <i class="fas fa-search"></i>
+        <input 
+          type="text" 
+          [(ngModel)]="filtros.globalSearch"
+          placeholder="Buscar eventos..." 
+          class="search-input">
+      </div>
+      
+      <button class="btn btn-add" (click)="goToInsertEvent()">
+        <i class="fas fa-plus"></i> Nuevo Evento
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="filters-section">
+  <div class="filters-header">
+    <h3><i class="fas fa-filter"></i> Filtros</h3>
+  </div>
+  
+  <div class="filters-grid">
+    <div class="filter-group">
+      <label>Estado:</label>
+      <select [(ngModel)]="filtros.estado" class="form-control">
+        <option value="">Todos los estados</option>
+        <option *ngFor="let estado of estadosDisponibles" [value]="estado">{{ estado }}</option>
+      </select>
+    </div>
+    
+    <div class="filter-group">
+      <label>Tipo:</label>
+      <select [(ngModel)]="filtros.tipo" class="form-control">
+        <option value="">Todos los tipos</option>
+        <option *ngFor="let tipo of tiposDisponibles" [value]="tipo">{{ tipo }}</option>
+      </select>
+    </div>
+    
+    <div class="filter-group">
+      <label>Ordenar por:</label>
+      <select [(ngModel)]="filtros.ordenNombre" class="form-control">
+        <option value="">Nombre</option>
+        <option value="asc">A-Z</option>
+        <option value="desc">Z-A</option>
+      </select>
+    </div>
+    
+    <div class="filter-group">
+      <label>Fecha inicio:</label>
+      <select [(ngModel)]="filtros.ordenInicio" class="form-control">
+        <option value="desc">Más reciente primero</option>
+        <option value="asc">Más antiguo primero</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="body-events">
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Estado</th>
+          <th>Tipo</th>
+          <th>Inicio</th>
+          <th>Final</th>
+          <th class="text-center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let event of eventosFiltrados; trackBy: trackByEvent">
+          <tr>
+            <td data-label="Nombre" [innerHTML]="highlightText(event.nombre)"></td>
+            <td>
+              <span class="estado-badge" [ngClass]="getEstadoClass(event.estado)">
+                {{ event.estado }}
+              </span>
+            </td>
+            <td data-label="Tipo">{{ event.tipo }}</td>
+            <td data-label="Inicio">{{ event.inicio | date: 'dd-MM-yyyy' }}</td>
+            <td data-label="Final">{{ event.final | date: 'dd-MM-yyyy' }}</td>
+            <td data-label="Acciones" class="actions-cell">
+              <button (click)="toggleDetalles(event.id)" class="btn btn-primary btn-sm">
+                <i class="fas" [class.fa-chevron-down]="!mostrarDetalles[event.id]" [class.fa-chevron-up]="mostrarDetalles[event.id]"></i>
+                {{ mostrarDetalles[event.id] ? 'Ocultar' : 'Detalles' }}
+              </button>
+            
+              <button (click)="goToUpdateEvent(event.id)" style="margin-left: 7%; margin-right: 7%;" class="btn btn-warning btn-sm">
+                <i class="fas fa-edit"></i> Editar
+              </button>
+            
+              <button (click)="eliminarEvento(event.id)" class="btn btn-danger btn-sm">
+                <i class="fas fa-trash-alt"></i> Eliminar
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="mostrarDetalles[event.id]">
+            <td colspan="6">
+              <div class="detalles-container">
+                <!-- Sección: Información General (ampliada) -->
+                <div class="detalle-group">
+                  <h4 class="group-title">
+                    <i class="fas fa-info-circle"></i> Información General
+                  </h4>
+                  <div class="grid-details">
+                    <!-- Columna 1 -->
+                    <div class="detail-item">
+                      <span class="detail-label">Nombre:</span>
+                      <span class="detail-value">{{ event.nombre || 'N/A' }}</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="detail-label">Tipo de evento:</span>
+                      <span class="detail-value">{{ event.tipo || 'N/A' }}</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="detail-label">Estado:</span>
+                      <span class="detail-value estado-badge" [ngClass]="getEstadoClass(event.estado)">
+                        {{ event.estado || 'N/A' }}
+                      </span>
+                    </div>
+                    
+                    <!-- Columna 2 -->
+                    <div class="detail-item">
+                      <span class="detail-label">Meta:</span>
+                      <span class="detail-value">{{ event.meta || 'N/A' }}</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="detail-label">Estrategia:</span>
+                      <span class="detail-value">{{ event.estrategia || 'N/A' }}</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="detail-label">Fecha inicio:</span>
+                      <span class="detail-value">{{ event.inicio | date: 'dd/MM/yyyy' }}</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="detail-label">Fecha finalización:</span>
+                      <span class="detail-value">{{ event.final | date: 'dd/MM/yyyy' }}</span>
+                    </div>
+                  </div>
+                </div>
+          
+                <!-- Sección: Finanzas -->
+                <div class="detalle-group">
+                  <h4 class="group-title">Finanzas</h4>
+                  <div class="grid-details">
+                    <div class="detail-item">
+                      <span class="detail-label">Presupuesto esperado:</span>
+                      <span class="detail-value">{{ event.presupuestoEsperado | currency }}</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="detail-label">Costo real:</span>
+                      <span class="detail-value">{{ event.costoReal | currency }}</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="detail-label">Ingresos esperados:</span>
+                      <span class="detail-value">{{ event.ingresoEsperado | currency }}</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="detail-label">Ingresos obtenidos:</span>
+                      <span class="detail-value">{{ event.ingresoObtenido | currency }}</span>
+                    </div>
+                  </div>
+                </div>
+          
+                <!-- Sección: Participación -->
+                <div class="detalle-group">
+                  <h4 class="group-title">Participación</h4>
+                  <div class="grid-details">
+                    <div class="detail-item">
+                      <span class="detail-label">Participantes:</span>
+                      <span class="detail-value">{{ event.participantes }}</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="detail-label">Confirmados:</span>
+                      <span class="detail-value">{{ event.confirmados }}</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="detail-label">Participaciones:</span>
+                      <span class="detail-value">{{ event.participaciones }}</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="detail-label">No participaciones:</span>
+                      <span class="detail-value">{{ event.noParticipaciones }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>
