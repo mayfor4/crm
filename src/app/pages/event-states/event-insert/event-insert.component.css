@@ -10,8 +10,8 @@
 }
 
 .form-header {
-  background: #4f46e5;
-  color: white;
+  background: #ffdd00e4;
+  color: black;
   padding: 2rem;
   text-align: center;
   position: relative;
@@ -32,7 +32,7 @@
 .form-icon {
   font-size: 2.5rem;
   margin-bottom: 1rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: black;
 }
 
 .event-form {
@@ -153,7 +153,7 @@ input.invalid, select.invalid {
 .money-section h3 {
   margin: 0 0 1rem;
   font-size: 1.2rem;
-  color: #afbe3d;
+  color: #fed634;
   display: flex;
   align-items: center;
   gap: 0.5rem;
