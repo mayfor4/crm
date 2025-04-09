@@ -1,6 +1,9 @@
-<!-- Botón +Agregar -->
-<div style="text-align: right; margin: 10px;">
-  <button class="add-button" (click)="showForm = true">+ Agregar</button>
+<!-- Encabezado con título y botón -->
+<div class="table-controls">
+  <h2><i class="fas fa-users"></i> Gestión de Clientes</h2>
+  <button class="btn-green" (click)="showForm = true">
+    <i class="fas fa-plus"></i> Nuevo Cliente
+  </button>
 </div>
 
 <!-- Modal del formulario para registrar/editar clientes -->
@@ -62,73 +65,76 @@
   </div>
 }
 
-<!-- Tabla de clientes registrados -->
-<div class="clientes-container">
+<!-- Tabla Rediseñada -->
+<div class="modern-table-container">
   @if (clients.length > 0) {
-    <div class="table-container">
-      <table class="styled-table">
+    <div class="table-wrapper">
+      <table class="modern-table">
         <thead>
           <tr>
-            <th>#</th>
-            <th>Nombre</th>
-            <th>Teléfono</th>
-            <th>Correo</th>
-            <th>Dirección</th>
-            <th>Edad</th>
-            <th>Sexo</th>
-            <th>Nivel de estudios</th>
-            <th>Ocupación</th>
-            <th>Compras (Total: ${{getTotalCompras(clients[i])}})</th>
-            <th>Asistencia</th>
-            <th>Promociones</th>
-            <th>Lealtad</th>
-            <th>Acciones</th>
+            <th width="50px">#</th>
+            <th>Información Básica</th>
+            <th>Contacto</th>
+            <th>Detalles</th>
+            <th>Historial</th>
+            <th>Participación</th>
+            <th width="120px">Acciones</th>
           </tr>
         </thead>
         <tbody>
           @for (client of clients; track client.id; let i = $index) {
-            <tr>
-              <td>{{ i + 1 }}</td>
-              <td>{{ client.nombre }}</td>
-              <td>{{ client.telefono }}</td>
-              <td>{{ client.correo }}</td>
-              <td class="direccion-cell">{{ client.direccion }}</td>
-              <td>{{ client.edad }}</td>
-              <td>{{ client.sexo }}</td>
-              <td>{{ client.nivelEstudios }}</td>
-              <td>{{ client.ocupacion }}</td>
-              <td>
-                <ul>
-                  @for (compra of client.compras; track compra; let j = $index) {
-                    <li>${{ compra }}</li>
-                  }
-                </ul>
-              </td>
-              <td>{{ client.asistenciaEventos }}</td>
-              <td>{{ client.promociones }}</td>
-              <td>
-                <span [ngClass]="{
-                  'lealtad-alta': client.nivelLealtad === 'Alto',
-                  'lealtad-media': client.nivelLealtad === 'Medio',
-                  'lealtad-baja': client.nivelLealtad === 'Bajo'
-                }">
-                  {{ client.nivelLealtad }}
-                </span>
-              </td>
-              <td class="acciones">
-                <button class="btn-icon editar" (click)="editClient(client)">
-                  <fa-icon [icon]="faEdit"></fa-icon>
-                </button>
-                <button class="btn-icon eliminar" (click)="deleteClient(client)">
-                  <fa-icon [icon]="faTrash"></fa-icon>
-                </button>
-              </td>
-            </tr>
+          <tr>
+            <td class="index">{{i + 1}}</td>
+            
+            <td class="client-main">
+              <div class="client-name">{{client.nombre}}</div>
+              <div class="client-age-sex">{{client.edad}} años • {{client.sexo}}</div>
+            </td>
+            
+            <td class="client-contact">
+              <div><i class="fas fa-phone"></i> {{client.telefono}}</div>
+              <div><i class="fas fa-envelope"></i> {{client.correo}}</div>
+              <div><i class="fas fa-map-marker-alt"></i> {{client.direccion}}</div>
+            </td>
+            
+            <td class="client-details">
+              <div><strong>Estudios:</strong> {{client.nivelEstudios}}</div>
+              <div><strong>Ocupación:</strong> {{client.ocupacion}}</div>
+            </td>
+            
+            <td class="client-history">
+              <div class="total-spent">${{getTotalCompras(client)}} total</div>
+            </td>
+            
+            <td class="client-engagement">
+              <span class="attendance-tag">{{client.asistenciaEventos}}</span>
+              <span class="promo-tag">{{client.promociones}}</span>
+              <div class="loyalty-level" [class]="'level-' + client.nivelLealtad.toLowerCase()">
+                <i class="fas fa-star"></i> {{client.nivelLealtad}}
+              </div>
+            </td>
+            
+            <td data-label="Acciones" class="actions-cell">
+              <button (click)="editClient(client)" class="btn btn-warning btn-sm">
+                <i class="fas fa-edit"></i> Editar
+              </button>
+            
+              <button (click)="deleteClient(client)" class="btn btn-danger btn-sm">
+                <i class="fas fa-trash-alt"></i> Eliminar
+              </button>
+            </td>
+          </tr>
           }
         </tbody>
       </table>
     </div>
   } @else {
-    <p class="text-center">No hay clientes registrados</p>
+    <div class="no-clients">
+      <i class="fas fa-user-slash"></i>
+      <h3>No hay clientes registrados</h3>
+      <button class="btn-yellow" (click)="showForm = true">
+        <i class="fas fa-plus"></i> Agregar Primer Cliente
+      </button>
+    </div>
   }
 </div>

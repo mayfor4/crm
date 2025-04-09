@@ -1,7 +1,7 @@
 /* Estilos generales mejorados */
 .header-container {
-  background: linear-gradient(135deg, #4f46e5 0%, #6c3483 100%);
-  color: white;
+  background-color: #ffdd00e4;
+  color: black;
   padding: 1rem;
   border-radius: 8px;
   margin-bottom: 1.5rem;
@@ -153,8 +153,8 @@
 
 /* Tabla mejorada */
 .table th {
-  background-color: #4f46e5;
-  color: white;
+  background-color: #ffdd00e4;
+  color: black;
   position: sticky;
   top: 0;
 }

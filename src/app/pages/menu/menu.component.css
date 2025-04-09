@@ -16,6 +16,20 @@
   overflow-y: auto;
 }
 
+/* Contenedor del logo */
+.logo-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Imagen del logo */
+.company-logo {
+  width: 120px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
 .nav-link {
   display: flex;
   align-items: center;

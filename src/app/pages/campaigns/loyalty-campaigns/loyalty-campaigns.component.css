@@ -9,7 +9,7 @@
   
   h1 {
     text-align: center;
-    color: #1f6feb; /* Color azul para el título */
+    color: black; /* Color azul para el título */
     margin-bottom: 20px;
   }
   
@@ -22,7 +22,7 @@
   }
   
   table, th, td {
-    border: 1px solid #1f6feb;
+    border: 1px solid black;
   }
   
   th, td {
@@ -32,8 +32,9 @@
   }
   
   th {
-    background: #1f6feb;
-    color: #ffffff;
+    background: #ffdd00e4;
+    color: black;
+    text-align: center;
   }
   
   tbody tr:nth-child(even) {

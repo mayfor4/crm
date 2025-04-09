@@ -6,6 +6,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ClientsService } from '../../services/clients.service';
 import { Client } from '../../models/events.model';
 import { firstValueFrom } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-clients',
@@ -85,11 +86,38 @@ i: any;
   }
 
   async deleteClient(client: Client) {
-    try {
-      await this.clientsService.eliminarClient(client);
-      this.getClients();
-    } catch (error) {
-      console.error('Error al eliminar cliente:', error);
+    const confirmacion = await Swal.fire({
+      title: '¿Estás seguro?',
+      text: `Vas a eliminar al cliente: ${client.nombre}`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    });
+  
+    if (confirmacion.isConfirmed) {
+      try {
+        await this.clientsService.eliminarClient(client);
+        this.getClients();
+  
+        await Swal.fire({
+          title: 'Eliminado',
+          text: 'El cliente fue eliminado correctamente.',
+          icon: 'success',
+          confirmButtonText: 'Aceptar'
+        });
+  
+      } catch (error) {
+        console.error('Error al eliminar cliente:', error);
+        Swal.fire({
+          title: 'Error',
+          text: 'Hubo un problema al eliminar el cliente.',
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+      }
     }
   }
 

@@ -11,7 +11,7 @@
 
 /* Estilos específicos para edición */
 .event-form-container.edit-mode .form-header {
-  background: #6c3483; /* Color morado para diferenciar edición */
+  background: #ffdd00e4; /* Color morado para diferenciar edición */
 }
 
 .event-form-container.edit-mode .submit-btn {
@@ -23,14 +23,14 @@
 }
 
 .event-form-container.edit-mode .stats-section {
-  background: #f5eef8;
+  background: #fff6bbe4;
   border-color: #e8daef;
 }
 
 /* Header del formulario */
 .form-header {
-  background: #4f46e5;
-  color: white;
+  background-color: #ffdd00e4;
+  color: black;
   padding: 2rem;
   text-align: center;
   position: relative;
@@ -51,7 +51,7 @@
 .form-icon {
   font-size: 2.5rem;
   margin-bottom: 1rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: black;
 }
 
 /* Indicador visual de campos modificados */
