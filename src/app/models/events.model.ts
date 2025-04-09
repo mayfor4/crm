@@ -23,3 +23,19 @@ export class MensajeModel{
   contenido!: string;
   fecha!: string;
 }
+
+export class Client {
+  id!: string;
+  nombre!: string;
+  telefono!: string;
+  correo!: string;
+  direccion!: string;
+  edad!: number;
+  sexo!: string;
+  nivelEstudios!: string;
+  ocupacion!: string;
+  asistenciaEventos!: string;
+  compras!: number[];
+  promociones!: string;
+  nivelLealtad!: string;
+}
