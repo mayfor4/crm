@@ -1,0 +1,120 @@
+/* Contenedor principal (centrado) */
+.login-card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  .login-logo {
+    max-width: 65%;
+    margin: 0 auto 20px;
+    display: block;
+  }
+  
+  /* Tarjeta del formulario */
+  .login-card {
+    background: white;
+    width: 100%;
+    max-width: 400px;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #f0f0f0;
+  }
+  
+  /* Encabezado */
+  .login-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .login-header h1 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+  }
+  .login-header p {
+    color: #666;
+    font-size: 0.9rem;
+  }
+  
+  /* Campos del formulario */
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  .form-group input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.3s;
+  }
+  .form-group input:focus {
+    outline: none;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
+  }
+  .form-group input.invalid {
+    border-color: #ef4444;
+  }
+  
+  /* Botón */
+  .login-btn {
+    width: 100%;
+    padding: 0.9rem;
+    background-color: #4f46e5;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 0.5rem;
+  }
+  .login-btn:hover {
+    background-color: #4338ca;
+  }
+  .login-btn:disabled {
+    background-color: #cbd5e1;
+    cursor: not-allowed;
+  }
+  
+  /* Mensajes de error */
+  .error-message {
+    color: #ef4444;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  
+  /* Enlaces */
+  .login-links {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 0.85rem;
+  }
+  .login-links a {
+    color: #4f46e5;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .login-links a:hover {
+    text-decoration: underline;
+  }
+  .login-links span {
+    display: block;
+    margin-top: 0.5rem;
+    color: #666;
+  }

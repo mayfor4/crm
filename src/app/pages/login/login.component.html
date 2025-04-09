@@ -1,0 +1,50 @@
+<div class="login-card-container">
+  <div class="login-card">
+    <div class="login-header">
+      <!-- Logo del CRM (ajusta la ruta según tu estructura) -->
+      <img src="foro-logo.png" alt="Logo CRM" class="login-logo">
+      <h1>Iniciar sesión</h1>
+      <p>Ingresa tus credenciales para continuar</p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="login-form">
+      <!-- Campo Email -->
+      <div class="form-group">
+        <label for="email">Correo electrónico</label>
+        <input 
+          type="email" 
+          id="email" 
+          formControlName="email"
+          [class.invalid]="form.get('email')?.touched && form.get('email')?.errors">
+        @if(form.get('email')?.touched && form.get('email')?.errors){
+          <div class="error-message">
+            <i class="fas fa-exclamation-circle"></i>
+            Correo electrónico inválido
+          </div>
+        }
+      </div>
+
+      <!-- Campo Contraseña -->
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+        <input 
+          type="password" 
+          id="password" 
+          formControlName="password"
+          [class.invalid]="(form.get('password')?.touched && form.get('password')?.errors) || this.error">
+        @if((form.get('password')?.touched && form.get('password')?.errors) || this.error){
+          <div class="error-message">
+            <i class="fas fa-exclamation-circle"></i>
+            @if(this.error) { Credenciales incorrectas } 
+            @else { La contraseña es requerida }
+          </div>
+        }
+      </div>
+
+      <!-- Botón de Submit -->
+      <button type="submit" class="login-btn" [disabled]="form.invalid">
+        Ingresar
+      </button>
+    </form>
+  </div>
+</div>
