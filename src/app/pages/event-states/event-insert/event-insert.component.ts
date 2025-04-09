@@ -22,7 +22,7 @@ export class EventInsertComponent {
     private eventsService: EventsService
   ) {
     this.eventForm = this.fb.group({
-      nombre: ['', [Validators.required, Validators.maxLength(100)]],
+      nombre: ['', [Validators.required, Validators.maxLength(200)]],
       estado: ['', Validators.required],
       tipo: ['', [Validators.required, Validators.maxLength(50)]],
       inicio: ['', [Validators.required, this.futureDateValidator]],
@@ -30,7 +30,13 @@ export class EventInsertComponent {
       participantes: [0, [Validators.required, Validators.min(0)]],
       confirmados: [0, [Validators.required, Validators.min(0)]],
       participaciones: [0, [Validators.required, Validators.min(0)]],
-      noParticipaciones: [0, [Validators.required, Validators.min(0)]]
+      noParticipaciones: [0, [Validators.required, Validators.min(0)]],
+      meta: ['', [Validators.required, Validators.maxLength(100)]],
+      estrategia: ['', [Validators.required, Validators.maxLength(200)]],
+      presupuestoEsperado: [0, [Validators.required, Validators.min(0)]],
+      costoReal: [0, [Validators.required, Validators.min(0)]],
+      ingresoEsperado: [0, [Validators.required, Validators.min(0)]],
+      ingresoObtenido: [0, [Validators.required, Validators.min(0)]],
     }, { validators: this.dateRangeValidator });
   }
 

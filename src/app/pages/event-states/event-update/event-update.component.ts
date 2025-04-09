@@ -15,7 +15,7 @@ export class EventUpdateComponent {
 
  eventForm!: FormGroup;
   eventId: string | null = null;
-  estados = ['Planeado', 'En curso', 'Finalizado', 'Cancelado'];
+  estados = ['Agendado', 'En Proceso', 'Finalizado', 'Cancelado'];
   isSubmitting = false;
 
   constructor(
@@ -36,6 +36,12 @@ export class EventUpdateComponent {
       confirmados: [0, [Validators.min(0)]],
       participaciones: [0, [Validators.min(0)]],
       noParticipaciones: [0, [Validators.min(0)]],
+      meta: ['', Validators.required],
+      estrategia: ['', Validators.required],
+      presupuestoEsperado: [0, [Validators.min(0)]],
+      costoReal: [0, [Validators.min(0)]],
+      ingresoEsperado: [0, [Validators.min(0)]],
+      ingresoObtenido: [0, [Validators.min(0)]],
     });
 
     this.eventId = this.route.snapshot.paramMap.get('id');
@@ -57,7 +63,13 @@ export class EventUpdateComponent {
         participantes: event.participantes,
         confirmados: event.confirmados,
         participaciones: event.participaciones,
-        noParticipaciones: event.noParticipaciones
+        noParticipaciones: event.noParticipaciones,
+        meta: event.meta,
+        estrategia: event.estrategia,
+        costoReal: event.costoReal,
+        presupuestoEsperado: event.presupuestoEsperado,
+        ingresoEsperado: event.ingresoEsperado,
+        ingresoObtenido: event.ingresoObtenido
       });
     } catch (error) {
       console.error('Error al cargar evento:', error);
@@ -92,6 +104,12 @@ export class EventUpdateComponent {
       confirmados: formValue.confirmados || 0,
       participaciones: formValue.participaciones || 0,
       noParticipaciones: formValue.noParticipaciones || 0,
+      meta: formValue.meta,
+      estrategia: formValue.estrategia,
+      presupuestoEsperado: formValue.presupuestoEsperado,
+      costoReal: formValue.costoReal,
+      ingresoEsperado: formValue.ingresoEsperado,
+      ingresoObtenido: formValue.ingresoObtenido
     };
   
     try {

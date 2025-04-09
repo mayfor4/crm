@@ -1,1 +1,105 @@
-<p>clients works!</p>
+<!-- Botón +Agregar -->
+<div style="text-align: right; margin: 10px;">
+  <button class="add-button" (click)="showForm = true">+ Agregar</button>
+</div>
+
+<!-- Modal del formulario -->
+@if (showForm) {
+  <div class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>{{ editingIndex !== null ? 'Editar cliente' : 'Nuevo cliente' }}</h3>
+        <button class="close-button" (click)="closeForm()">×</button>
+      </div>
+      <form (ngSubmit)="addClient()" class="form-modal">
+        <input type="text" placeholder="Nombre" [(ngModel)]="newClient.nombre" name="nombre" required>
+        <input type="text" placeholder="Teléfono" [(ngModel)]="newClient.telefono" name="telefono" required>
+        <input type="email" placeholder="Correo" [(ngModel)]="newClient.correo" name="correo" required>
+        <input type="text" placeholder="Dirección" [(ngModel)]="newClient.direccion" name="direccion" required>
+        <input type="number" placeholder="Edad" [(ngModel)]="newClient.edad" name="edad" required>
+
+        <select [(ngModel)]="newClient.sexo" name="sexo" required>
+          <option value="" disabled selected>Sexo</option>
+          <option value="Masculino">Masculino</option>
+          <option value="Femenino">Femenino</option>
+        </select>
+
+        <input type="text" placeholder="Nivel de estudios" [(ngModel)]="newClient.nivelEstudios" name="nivelEstudios" required>
+        <input type="text" placeholder="Ocupación" [(ngModel)]="newClient.ocupacion" name="ocupacion" required>
+
+        <input type="text" placeholder="Historial de compras (ej. $250, $300)" [(ngModel)]="newClient.historialCompras" name="historialCompras" pattern="(\s*\$?\d+(\.\d{1,2})?\s*,?)+" required>
+        <input type="text" placeholder="Asistencia a eventos" [(ngModel)]="newClient.asistenciaEventos" name="asistenciaEventos" required>
+        <input type="text" placeholder="Participación en promociones" [(ngModel)]="newClient.promociones" name="promociones" required>
+
+        <div class="form-buttons">
+          <button type="button" (click)="closeForm()">Cancelar</button>
+          <button type="submit">{{ editingIndex !== null ? 'Guardar' : 'Agregar' }}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+}
+
+  
+  @if (clients.length > 0) {
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Teléfono</th>
+            <th>Correo</th>
+            <th>Dirección</th>
+            <th>Edad</th>
+            <th>Sexo</th>
+            <th>Nivel de estudios</th>
+            <th>Ocupación</th>
+            <th>Compras</th>
+            <th>Asistencia</th>
+            <th>Promociones</th>
+            <th>Lealtad</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (client of clients; track client; let i = $index) {
+            <tr>
+              <td>{{ i + 1 }}</td>
+              <td>{{ client.nombre }}</td>
+              <td>{{ client.telefono }}</td>
+              <td>{{ client.correo }}</td>
+              <td>{{ client.direccion }}</td>
+              <td>{{ client.edad }}</td>
+              <td>{{ client.sexo }}</td>
+              <td>{{ client.nivelEstudios }}</td>
+              <td>{{ client.ocupacion }}</td>
+              <td>
+                <ul>
+                  @for (compra of client.compras; track compra; let j = $index) {
+                    <li>${{ compra }}</li>
+                  }
+                </ul>
+              </td>
+              <td>{{ client.asistenciaEventos }}</td>
+              <td>{{ client.promociones }}</td>
+              <td>
+                <span [ngClass]="{
+                  'lealtad-alta': client.nivelLealtad === 'Alto',
+                  'lealtad-media': client.nivelLealtad === 'Medio',
+                  'lealtad-baja': client.nivelLealtad === 'Bajo'
+                }">
+                  {{ client.nivelLealtad }}
+                </span>
+              </td>
+              <td>
+                <button class="btn-editar" (click)="editClient(i)">Editar</button>
+                <button class="btn-eliminar" (click)="deleteClient(i)">Eliminar</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  

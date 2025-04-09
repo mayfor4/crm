@@ -11,7 +11,7 @@ import { EventsComponent } from './pages/events/events.component';
 import { EventInsertComponent } from './pages/event-states/event-insert/event-insert.component';
 import { EventUpdateComponent } from './pages/event-states/event-update/event-update.component';
 import { CotizacionComponent } from './pages/cotizacion/cotizacion.component';
-
+import { MensajeriaComponent } from './pages/mensajeria/mensajeria.component';
 export const routes: Routes = [
   {
     path: 'home',
@@ -60,6 +60,10 @@ export const routes: Routes = [
   {
     path: 'cotizacion',
     component: CotizacionComponent,
+  },
+  {
+    path: 'mensajeria',
+    component: MensajeriaComponent
   },
   {
     path: '**',

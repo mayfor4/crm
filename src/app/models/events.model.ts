@@ -9,4 +9,10 @@ export class EventModel {
     confirmados!: number;
     participaciones!: number;
     noParticipaciones!: number;
+    meta!: string;
+    estrategia!: string;
+    presupuestoEsperado!: number;
+    costoReal!: number;
+    ingresoEsperado!: number;
+    ingresoObtenido!: number;
 }

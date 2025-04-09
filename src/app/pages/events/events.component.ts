@@ -20,9 +20,10 @@ export class EventsComponent {
   events: EventModel[] = [];
   mostrarDetalles: { [id: string]: boolean } = {};
   filtros = {
-    nombre: '',
+    globalSearch: '',
     estado: '',
     tipo: '',
+    ordenNombre: '',
     ordenInicio: 'desc',
     ordenFinal: 'desc'
   };
@@ -34,6 +35,21 @@ export class EventsComponent {
   faPlus = faPlus;
   faChevronDown = faChevronDown;
   faChevronUp = faChevronUp;
+
+  getEstadoClass(estado: string): string {
+    switch (estado?.toLowerCase()) {
+      case 'agendado':
+        return 'badge-morado';
+      case 'en proceso':
+        return 'badge-amarillo';
+      case 'finalizado':
+        return 'badge-verde';
+      case 'cancelado':
+        return 'badge-rojo';
+      default:
+        return '';
+    }
+  }
 
   constructor(private eventsService: EventsService, private router: Router) {
     this.getEvents();
@@ -101,34 +117,52 @@ export class EventsComponent {
     }
   }
 
-  // Filtro y ordenamiento en tiempo real
+  // Resaltar texto coincidente
+  highlightText(text: string): string {
+    if (!this.filtros.globalSearch) return text;
+    
+    const searchTerm = this.filtros.globalSearch.toLowerCase();
+    const regex = new RegExp(searchTerm, 'gi');
+    return text.replace(regex, match => 
+      `<span class="highlight">${match}</span>`
+    );
+  }
+
+  // Filtro y ordenamiento mejorado
   get eventosFiltrados(): EventModel[] {
     return this.events
       .filter(event => {
-        const nombre = this.filtros.nombre?.toLowerCase() || '';
-        const coincideNombre = event.nombre.toLowerCase().includes(nombre);
-        const coincideEstado = this.filtros.estado ? event.estado === this.filtros.estado : true;
-        const coincideTipo = this.filtros.tipo ? event.tipo === this.filtros.tipo : true;
-        return coincideNombre && coincideEstado && coincideTipo;
+        const searchTerm = this.filtros.globalSearch?.toLowerCase() || '';
+        const matchesSearch = 
+          event.nombre.toLowerCase().includes(searchTerm) ||
+          event.tipo.toLowerCase().includes(searchTerm) ||
+          event.estado.toLowerCase().includes(searchTerm);
+        
+        const matchesEstado = this.filtros.estado ? 
+          event.estado === this.filtros.estado : true;
+        
+        const matchesTipo = this.filtros.tipo ? 
+          event.tipo === this.filtros.tipo : true;
+        
+        return matchesSearch && matchesEstado && matchesTipo;
       })
       .sort((a, b) => {
-        let resultado = 0;
-
+        // Orden por nombre
+        if (this.filtros.ordenNombre) {
+          const nameA = a.nombre.toLowerCase();
+          const nameB = b.nombre.toLowerCase();
+          return this.filtros.ordenNombre === 'asc' ? 
+            nameA.localeCompare(nameB) : nameB.localeCompare(nameA);
+        }
+        
+        // Orden por fecha inicio
         if (this.filtros.ordenInicio) {
-          const fechaA = new Date(a.inicio).getTime();
-          const fechaB = new Date(b.inicio).getTime();
-          resultado = this.filtros.ordenInicio === 'asc' ? fechaA - fechaB : fechaB - fechaA;
+          const dateA = new Date(a.inicio).getTime();
+          const dateB = new Date(b.inicio).getTime();
+          return this.filtros.ordenInicio === 'asc' ? dateA - dateB : dateB - dateA;
         }
-
-        if (this.filtros.ordenFinal) {
-          const fechaA = new Date(a.final).getTime();
-          const fechaB = new Date(b.final).getTime();
-          const resultadoFinal = this.filtros.ordenFinal === 'asc' ? fechaA - fechaB : fechaB - fechaA;
-          resultado += resultadoFinal;
-        }
-
-        return resultado;
+        
+        return 0;
       });
   }
-
 }
