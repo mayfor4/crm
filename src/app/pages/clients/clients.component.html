@@ -3,7 +3,7 @@
   <button class="add-button" (click)="showForm = true">+ Agregar</button>
 </div>
 
-<!-- Modal del formulario -->
+<!-- Modal del formulario para registrar/editar clientes -->
 @if (showForm) {
   <div class="modal-overlay">
     <div class="modal-content">
@@ -18,18 +18,36 @@
         <input type="text" placeholder="Dirección" [(ngModel)]="newClient.direccion" name="direccion" required>
         <input type="number" placeholder="Edad" [(ngModel)]="newClient.edad" name="edad" required>
 
-        <select [(ngModel)]="newClient.sexo" name="sexo" required>
-          <option value="" disabled selected>Sexo</option>
-          <option value="Masculino">Masculino</option>
-          <option value="Femenino">Femenino</option>
+        <!-- Asistencia a eventos -->
+        <select [(ngModel)]="newClient.asistenciaEventos" name="asistenciaEventos" required>
+          <option value="" disabled selected>Frecuencia de asistencia</option>
+          <option value="Muy seguido">Muy seguido</option>
+          <option value="A menudo">A menudo</option>
+          <option value="Casi nunca">Casi nunca</option>
+          <option value="Rara vez">Rara vez</option>
         </select>
 
         <input type="text" placeholder="Nivel de estudios" [(ngModel)]="newClient.nivelEstudios" name="nivelEstudios" required>
         <input type="text" placeholder="Ocupación" [(ngModel)]="newClient.ocupacion" name="ocupacion" required>
 
-        <input type="text" placeholder="Historial de compras (ej. $250, $300)" [(ngModel)]="newClient.historialCompras" name="historialCompras" pattern="(\s*\$?\d+(\.\d{1,2})?\s*,?)+" required>
-        <input type="text" placeholder="Asistencia a eventos" [(ngModel)]="newClient.asistenciaEventos" name="asistenciaEventos" required>
-        <input type="text" placeholder="Participación en promociones" [(ngModel)]="newClient.promociones" name="promociones" required>
+        <!-- Historial de compras -->
+        <input
+          type="text"
+          placeholder="Historial de compras (ej. $250, $300)"
+          [(ngModel)]="newClient.historialCompras"
+          name="historialCompras"
+          pattern="(\s*\$?\d+(\.\d{1,2})?\s*,?)+"
+          required
+        >
+
+        <!-- Participación en promociones -->
+        <select [(ngModel)]="newClient.promociones" name="promociones" required>
+          <option value="" disabled selected>Participaciones en promociones</option>
+          <option value="3">3 o más</option>
+          <option value="2">2</option>
+          <option value="1">1</option>
+          <option value="0">Ninguna</option>
+        </select>
 
         <div class="form-buttons">
           <button type="button" (click)="closeForm()">Cancelar</button>
@@ -40,10 +58,12 @@
   </div>
 }
 
-  
+
+<!-- Parametros y estructura de clientes registrados -->
+<div class="clientes-container">
   @if (clients.length > 0) {
     <div class="table-container">
-      <table>
+      <table class="styled-table">
         <thead>
           <tr>
             <th>#</th>
@@ -69,7 +89,7 @@
               <td>{{ client.nombre }}</td>
               <td>{{ client.telefono }}</td>
               <td>{{ client.correo }}</td>
-              <td>{{ client.direccion }}</td>
+              <td class="direccion-cell">{{ client.direccion }}</td>
               <td>{{ client.edad }}</td>
               <td>{{ client.sexo }}</td>
               <td>{{ client.nivelEstudios }}</td>
@@ -92,9 +112,13 @@
                   {{ client.nivelLealtad }}
                 </span>
               </td>
-              <td>
-                <button class="btn-editar" (click)="editClient(i)">Editar</button>
-                <button class="btn-eliminar" (click)="deleteClient(i)">Eliminar</button>
+              <td class="acciones">
+                <button class="btn-icon editar" (click)="editClient(i)">
+                  <fa-icon [icon]="faEdit"></fa-icon>
+                </button>
+                <button class="btn-icon eliminar" (click)="deleteClient(i)">
+                  <fa-icon [icon]="faTrash"></fa-icon>
+                </button>
               </td>
             </tr>
           }
@@ -102,4 +126,4 @@
       </table>
     </div>
   }
-  
+</div>
