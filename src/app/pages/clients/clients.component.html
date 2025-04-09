@@ -8,7 +8,7 @@
   <div class="modal-overlay">
     <div class="modal-content">
       <div class="modal-header">
-        <h3>{{ editingIndex !== null ? 'Editar cliente' : 'Nuevo cliente' }}</h3>
+        <h3>{{ editingClientId ? 'Editar cliente' : 'Nuevo cliente' }}</h3>
         <button class="close-button" (click)="closeForm()">×</button>
       </div>
       <form (ngSubmit)="addClient()" class="form-modal">
@@ -17,14 +17,19 @@
         <input type="email" placeholder="Correo" [(ngModel)]="newClient.correo" name="correo" required>
         <input type="text" placeholder="Dirección" [(ngModel)]="newClient.direccion" name="direccion" required>
         <input type="number" placeholder="Edad" [(ngModel)]="newClient.edad" name="edad" required>
+       
+        <select [(ngModel)]="newClient.sexo" name="sexo" required>
+          <option value="" disabled selected>Sexo</option>
+          <option value="Masculino">Masculino</option>
+          <option value="Femenino">Femenino</option>
+        </select>
 
         <!-- Asistencia a eventos -->
         <select [(ngModel)]="newClient.asistenciaEventos" name="asistenciaEventos" required>
           <option value="" disabled selected>Frecuencia de asistencia</option>
-          <option value="Muy seguido">Muy seguido</option>
-          <option value="A menudo">A menudo</option>
-          <option value="Casi nunca">Casi nunca</option>
-          <option value="Rara vez">Rara vez</option>
+          @for (option of asistenciaOptions; track option) {
+            <option [value]="option">{{option}}</option>
+          }
         </select>
 
         <input type="text" placeholder="Nivel de estudios" [(ngModel)]="newClient.nivelEstudios" name="nivelEstudios" required>
@@ -34,7 +39,7 @@
         <input
           type="text"
           placeholder="Historial de compras (ej. $250, $300)"
-          [(ngModel)]="newClient.historialCompras"
+          (change)="onComprasInputChange($event)"
           name="historialCompras"
           pattern="(\s*\$?\d+(\.\d{1,2})?\s*,?)+"
           required
@@ -43,23 +48,21 @@
         <!-- Participación en promociones -->
         <select [(ngModel)]="newClient.promociones" name="promociones" required>
           <option value="" disabled selected>Participaciones en promociones</option>
-          <option value="3">3 o más</option>
-          <option value="2">2</option>
-          <option value="1">1</option>
-          <option value="0">Ninguna</option>
+          @for (option of promocionesOptions; track option) {
+            <option [value]="option">{{option}}</option>
+          }
         </select>
 
         <div class="form-buttons">
           <button type="button" (click)="closeForm()">Cancelar</button>
-          <button type="submit">{{ editingIndex !== null ? 'Guardar' : 'Agregar' }}</button>
+          <button type="submit">{{ editingClientId ? 'Guardar' : 'Agregar' }}</button>
         </div>
       </form>
     </div>
   </div>
 }
 
-
-<!-- Parametros y estructura de clientes registrados -->
+<!-- Tabla de clientes registrados -->
 <div class="clientes-container">
   @if (clients.length > 0) {
     <div class="table-container">
@@ -75,7 +78,7 @@
             <th>Sexo</th>
             <th>Nivel de estudios</th>
             <th>Ocupación</th>
-            <th>Compras</th>
+            <th>Compras (Total: ${{getTotalCompras(clients[i])}})</th>
             <th>Asistencia</th>
             <th>Promociones</th>
             <th>Lealtad</th>
@@ -83,7 +86,7 @@
           </tr>
         </thead>
         <tbody>
-          @for (client of clients; track client; let i = $index) {
+          @for (client of clients; track client.id; let i = $index) {
             <tr>
               <td>{{ i + 1 }}</td>
               <td>{{ client.nombre }}</td>
@@ -113,10 +116,10 @@
                 </span>
               </td>
               <td class="acciones">
-                <button class="btn-icon editar" (click)="editClient(i)">
+                <button class="btn-icon editar" (click)="editClient(client)">
                   <fa-icon [icon]="faEdit"></fa-icon>
                 </button>
-                <button class="btn-icon eliminar" (click)="deleteClient(i)">
+                <button class="btn-icon eliminar" (click)="deleteClient(client)">
                   <fa-icon [icon]="faTrash"></fa-icon>
                 </button>
               </td>
@@ -125,5 +128,7 @@
         </tbody>
       </table>
     </div>
+  } @else {
+    <p class="text-center">No hay clientes registrados</p>
   }
 </div>
