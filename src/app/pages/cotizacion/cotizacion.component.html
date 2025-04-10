@@ -1,3 +1,4 @@
+
 <div class="quote-system">
   <div class="quote-header">
     <h2><i class="fas fa-file-invoice-dollar"></i> Cotizaciones para Eventos</h2>
@@ -17,10 +18,12 @@
       (click)="seleccionarTipo('artistas')"
       class="tab-button">
       <i class="fas fa-music"></i> Contratación de Artistas
+
     </button>
   </div>
 
   @if (tipoSeleccionado === 'bebidas') {
+
     <div class="quote-form-container">
       <div class="form-header">
         <h3><i class="fas fa-glass-cheers"></i> Cotización de Bebidas</h3>
@@ -102,12 +105,14 @@
 
         <button type="submit" class="submit-btn">
           <i class="fas fa-paper-plane"></i> Solicitar Cotización
+   
         </button>
       </form>
     </div>
   }
 
   @if (tipoSeleccionado === 'artistas') {
+
     <div class="quote-form-container">
       <div class="form-header">
         <h3><i class="fas fa-music"></i> Cotización de Artistas</h3>
@@ -192,8 +197,11 @@
   
         <button type="submit" class="submit-btn">
           <i class="fas fa-paper-plane"></i> Solicitar Cotización
+   
         </button>
       </form>
     </div>
   }
+
 </div>
+
