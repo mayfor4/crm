@@ -1,96 +1,249 @@
-.cotizacion-container {
-    max-width: 700px;
-    margin: auto;
-    padding: 20px;
-    text-align: center;
-    background: #f8f9fa;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+/* Estilos base */
+.quote-system {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+.quote-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.quote-header h2 {
+  color: #333;
+  font-size: 28px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.quote-header p {
+  color: #666;
+  font-size: 16px;
+}
+
+/* Pestañas */
+.quote-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.tab-button {
+  padding: 12px 25px;
+  background: #f5f5f5;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tab-button:hover {
+  background: #eee;
+}
+
+.tab-button.active {
+  background: #FFC107;
+  color: #333;
+  box-shadow: 0 4px 8px rgba(255, 193, 7, 0.3);
+}
+
+/* Formulario */
+.quote-form-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  padding: 30px;
+}
+
+.form-header {
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.form-header h3 {
+  font-size: 22px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.form-header p {
+  color: #666;
+  font-size: 15px;
+  margin-top: 8px;
+}
+
+/* Campos del formulario */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #444;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: all 0.3s;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #FFC107;
+  box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.2);
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+/* Servicios adicionales */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.service-option {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  background: #f9f9f9;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.service-option:hover {
+  background: #f0f0f0;
+}
+
+.service-option input {
+  margin-right: 10px;
+}
+
+.service-option span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+/* Botón de enviar */
+.submit-btn {
+  width: 100%;
+  padding: 15px;
+  background: #FFC107;
+  color: #333;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.submit-btn:hover {
+  background: #FFB300;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+    gap: 0;
   }
   
-  .cotizacion-tabs {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 15px;
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .quote-tabs {
+    flex-direction: column;
   }
   
-  .cotizacion-tabs button {
-    width: 50%;
-    padding: 10px;
-    border: none;
-    background: none;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s;
+  .services-grid {
+    grid-template-columns: 1fr;
   }
-  
-  .cotizacion-tabs .active {
-    background: #dde4f0;
-    border-radius: 10px;
-  }
-  
-  .cotizacion-form {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .cotizacion-form label {
-    display: block;
-    margin-top: 10px;
-    font-weight: bold;
-  }
-  
-  .cotizacion-form select,
-  .cotizacion-form input,
-  .cotizacion-form textarea {
-    display: block;
-    width: 100%;
-    margin: 5px 0 15px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .cotizacion-form textarea {
-    height: 80px;
-    resize: none;
-  }
-  
-  .servicios-adicionales {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    margin-bottom: 15px;
-  }
-  
-  .servicios-adicionales label {
-    font-weight: normal;
-    background: #e9ecef;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-  }
-  
-  .servicios-adicionales input {
-    margin-right: 8px;
-  }
-  
-  .cotizacion-form button {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    background: #007bff;
-    color: white;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .cotizacion-form button:hover {
-    background: #0056b3;
-  }
-  
+}
+
+/* Estilo para input de presupuesto con símbolo $ */
+.input-with-symbol {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-with-symbol .symbol {
+  position: absolute;
+  left: 12px;
+  color: #666;
+  font-weight: 600;
+}
+
+.input-with-symbol .form-input {
+  padding-left: 25px;
+}
+
+/* Iconos específicos para artistas */
+.fa-music, .fa-record-vinyl, .fa-guitar {
+  color: #FFC107;
+}
+
+/* Ajustes para servicios de artistas */
+.service-option span i.fa-theater-masks {
+  color: #9C27B0;
+}
+
+.service-option span i.fa-video {
+  color: #2196F3;
+}
+
+/* Animación para el botón de enviar */
+.submit-btn {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.submit-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}

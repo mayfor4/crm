@@ -1,60 +1,116 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
+import { PromocionesModel } from '../../../models/promociones.model';
+import { PromocionesService } from '../../../services/promociones.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-interface Promocion {
-  id: number;
-  nombre: string;
-  descripcion: string;
-  fechaInicio: string;
-  fechaFin: string;
-  tipo: string;
-}
+import { firstValueFrom, throwIfEmpty } from 'rxjs';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faPlus, faChevronDown, faChevronUp, faEdit, faTrash} from '@fortawesome/free-solid-svg-icons';
+import Swal from 'sweetalert2';
 
 @Component({
+  imports: [FormsModule, CommonModule, FontAwesomeModule], 
   selector: 'app-promotions',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
   templateUrl: './promotions.component.html',
   styleUrls: ['./promotions.component.css']
 })
-export class PromotionsComponent {
-  promociones: Promocion[] = [
-    { id: 1, nombre: 'Descuento Verano', descripcion: '20% de descuento en bebidas', fechaInicio: '2025-06-01', fechaFin: '2025-06-30', tipo: 'general' },
-    { id: 2, nombre: '2x1 en Entradas', descripcion: 'Compra una entrada y llévate otra gratis', fechaInicio: '2025-07-01', fechaFin: '2025-07-15', tipo: 'clientes' },
-    { id: 3, nombre: 'Descuento Estudiantes', descripcion: '15% de descuento para estudiantes', fechaInicio: '2025-08-01', fechaFin: '2025-08-31', tipo: 'general' },
-    { id: 4, nombre: 'Semana del Café', descripcion: '10% de descuento en todas las bebidas de café', fechaInicio: '2025-09-01', fechaFin: '2025-09-07', tipo: 'clientes' },
-    { id: 5, nombre: 'Promoción de Otoño', descripcion: '30% de descuento en productos seleccionados', fechaInicio: '2025-10-01', fechaFin: '2025-10-31', tipo: 'general' },
-    { id: 6, nombre: 'Descuento para Nuevos Clientes', descripcion: '25% de descuento en la primera compra', fechaInicio: '2025-11-01', fechaFin: '2025-11-30', tipo: 'clientes' },
-    { id: 7, nombre: 'Black Friday', descripcion: '50% de descuento en todos los productos', fechaInicio: '2025-11-27', fechaFin: '2025-11-27', tipo: 'general' },
-    { id: 8, nombre: 'Cyber Monday', descripcion: '40% de descuento en compras online', fechaInicio: '2025-11-30', fechaFin: '2025-11-30', tipo: 'general' },
-    
-  ];
+export class PromotionsComponent{
+  
+  promociones: PromocionesModel[] = [];
+  promocion = new PromocionesModel();
 
-  promocion: Promocion = this.getEmptyPromocion();
-
-  getEmptyPromocion(): Promocion {
-    return { id: 0, nombre: '', descripcion: '', fechaInicio: '', fechaFin: '', tipo: 'general' };
+  constructor(private promocionesService: PromocionesService) {
+    this.getElements();
   }
 
-  onSubmit(): void {
-    if (this.promocion.id === 0) {
-      this.promocion.id = this.promociones.length + 1;
-      this.promociones.push(this.promocion);
-    } else {
-      const index = this.promociones.findIndex(p => p.id === this.promocion.id);
-      if (index !== -1) {
-        this.promociones[index] = { ...this.promocion };
-      }
+  async getElements(): Promise<void> {
+    try {
+      const promocionesData = await firstValueFrom(this.promocionesService.getPromociones());
+      
+      // Nos aseguramos de que todos los campos estén presentes
+      this.promociones = promocionesData.map((promocionData: any) => ({
+        id: promocionData.id || '',
+        nombre: promocionData.nombre || '',
+        descripcion: promocionData.descripcion || '',
+        fechaInicio: new Date(promocionData.fechaInicio),
+        fechaFinal: new Date(promocionData.fechaFinal),
+        tipoPromocion: promocionData.tipoPromocion || ''
+      })) as PromocionesModel[];
+  
+    } catch (error) {
+      console.error('Error al obtener promociones: ', error);
+      this.promociones = [];
     }
-    this.promocion = this.getEmptyPromocion();
   }
 
-  editarPromocion(promo: Promocion): void {
-    this.promocion = { ...promo };
+  async addPromocion() {
+    try {
+      // Convertir fechas de string a Date si es necesario
+      this.promocion.fechaInicio = new Date(this.promocion.fechaInicio);
+      this.promocion.fechaFinal = new Date(this.promocion.fechaFinal);
+
+      if (this.promocion.id) {
+        await this.promocionesService.modificarPromocion(this.promocion);
+        Swal.fire('Actualizado', 'Promoción actualizada correctamente.', 'success');
+      } else {
+        await this.promocionesService.agregarPromocion(this.promocion);
+        Swal.fire('Agregado', 'Promoción agregada correctamente.', 'success');
+      }
+
+      this.promocion = new PromocionesModel();
+      this.getElements();
+    } catch (error) {
+      console.error('Error al guardar la promoción: ', error);
+      Swal.fire('Error', 'Hubo un problema al guardar la promoción.', 'error');
+    }
   }
 
-  eliminarPromocion(id: number): void {
-    this.promociones = this.promociones.filter(p => p.id !== id);
+  updatePromocion() {
+    const promocionActualizada = {
+      ...this.promocion,
+      fechaInicio: new Date(this.promocion.fechaInicio),
+      fechaFinal: new Date(this.promocion.fechaFinal)
+    };
+  
+    this.promocionesService.modificarPromocion(promocionActualizada)
+      .then(() => {
+      })
+      .catch(err => console.error(err));
+  }
+
+  deletePromocion(id: string) {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Esta acción eliminará la promoción permanentemente.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then(result => {
+      if (result.isConfirmed) {
+        this.promocionesService.eliminarPromocion(id)
+          .then(() => {
+            this.getElements();
+            Swal.fire('Eliminado', 'Promoción eliminada correctamente.', 'success');
+          })
+          .catch(error => {
+            console.error('Error al eliminar la promoción', error);
+            Swal.fire('Error', 'No se pudo eliminar la promoción.', 'error');
+          });
+      }
+    });
+  }
+
+  editPromocion(promo: PromocionesModel) {
+    this.promocion = {
+      ...promo,
+    };
+  }
+
+  formatDateForInput(date: Date): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 }

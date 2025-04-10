@@ -17,7 +17,7 @@ export class EventModel {
     ingresoObtenido!: number;
 }
 export class MensajeModel{
-    id!: string;
+  id!: string;
   emisor!: string;
   receptor!: string;
   contenido!: string;
