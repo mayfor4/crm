@@ -1,140 +1,140 @@
-<!-- Encabezado con título y botón -->
-<div class="table-controls">
-  <h2><i class="fas fa-users"></i> Gestión de Clientes</h2>
-  <button class="btn-green" (click)="showForm = true">
-    <i class="fas fa-plus"></i> Nuevo Cliente
-  </button>
-</div>
-
-<!-- Modal del formulario para registrar/editar clientes -->
-@if (showForm) {
-  <div class="modal-overlay">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3>{{ editingClientId ? 'Editar cliente' : 'Nuevo cliente' }}</h3>
-        <button class="close-button" (click)="closeForm()">×</button>
-      </div>
-      <form (ngSubmit)="addClient()" class="form-modal">
-        <input type="text" placeholder="Nombre" [(ngModel)]="newClient.nombre" name="nombre" required>
-        <input type="text" placeholder="Teléfono" [(ngModel)]="newClient.telefono" name="telefono" required>
-        <input type="email" placeholder="Correo" [(ngModel)]="newClient.correo" name="correo" required>
-        <input type="text" placeholder="Dirección" [(ngModel)]="newClient.direccion" name="direccion" required>
-        <input type="number" placeholder="Edad" [(ngModel)]="newClient.edad" name="edad" required>
-       
-        <select [(ngModel)]="newClient.sexo" name="sexo" required>
-          <option value="" disabled selected>Sexo</option>
-          <option value="Masculino">Masculino</option>
-          <option value="Femenino">Femenino</option>
-        </select>
-
-        <!-- Asistencia a eventos -->
-        <select [(ngModel)]="newClient.asistenciaEventos" name="asistenciaEventos" required>
-          <option value="" disabled selected>Frecuencia de asistencia</option>
-          @for (option of asistenciaOptions; track option) {
-            <option [value]="option">{{option}}</option>
-          }
-        </select>
-
-        <input type="text" placeholder="Nivel de estudios" [(ngModel)]="newClient.nivelEstudios" name="nivelEstudios" required>
-        <input type="text" placeholder="Ocupación" [(ngModel)]="newClient.ocupacion" name="ocupacion" required>
-
-        <!-- Historial de compras -->
-        <input
-          type="text"
-          placeholder="Historial de compras (ej. $250, $300)"
-          (change)="onComprasInputChange($event)"
-          name="historialCompras"
-          pattern="(\s*\$?\d+(\.\d{1,2})?\s*,?)+"
-          required
-        >
-
-        <!-- Participación en promociones -->
-        <select [(ngModel)]="newClient.promociones" name="promociones" required>
-          <option value="" disabled selected>Participaciones en promociones</option>
-          @for (option of promocionesOptions; track option) {
-            <option [value]="option">{{option}}</option>
-          }
-        </select>
-
-        <div class="form-buttons">
-          <button type="button" (click)="closeForm()">Cancelar</button>
-          <button type="submit">{{ editingClientId ? 'Guardar' : 'Agregar' }}</button>
-        </div>
-      </form>
-    </div>
+  <!-- Encabezado con título y botón -->
+  <div class="table-controls">
+    <h2><i class="fas fa-users"></i> Gestión de Clientes</h2>
+    <button class="btn-green" (click)="showForm = true">
+      <i class="fas fa-plus"></i> Nuevo Cliente
+    </button>
   </div>
-}
 
-<!-- Tabla Rediseñada -->
-<div class="modern-table-container">
-  @if (clients.length > 0) {
-    <div class="table-wrapper">
-      <table class="modern-table">
-        <thead>
-          <tr>
-            <th width="50px">#</th>
-            <th>Información Básica</th>
-            <th>Contacto</th>
-            <th>Detalles</th>
-            <th>Historial</th>
-            <th>Participación</th>
-            <th width="120px">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (client of clients; track client.id; let i = $index) {
-          <tr>
-            <td class="index">{{i + 1}}</td>
-            
-            <td class="client-main">
-              <div class="client-name">{{client.nombre}}</div>
-              <div class="client-age-sex">{{client.edad}} años • {{client.sexo}}</div>
-            </td>
-            
-            <td class="client-contact">
-              <div><i class="fas fa-phone"></i> {{client.telefono}}</div>
-              <div><i class="fas fa-envelope"></i> {{client.correo}}</div>
-              <div><i class="fas fa-map-marker-alt"></i> {{client.direccion}}</div>
-            </td>
-            
-            <td class="client-details">
-              <div><strong>Estudios:</strong> {{client.nivelEstudios}}</div>
-              <div><strong>Ocupación:</strong> {{client.ocupacion}}</div>
-            </td>
-            
-            <td class="client-history">
-              <div class="total-spent">${{getTotalCompras(client)}} total</div>
-            </td>
-            
-            <td class="client-engagement">
-              <span class="attendance-tag">{{client.asistenciaEventos}}</span>
-              <span class="promo-tag">{{client.promociones}}</span>
-              <div class="loyalty-level" [class]="'level-' + client.nivelLealtad.toLowerCase()">
-                <i class="fas fa-star"></i> {{client.nivelLealtad}}
-              </div>
-            </td>
-            
-            <td data-label="Acciones" class="actions-cell">
-              <button (click)="editClient(client)" class="btn btn-warning btn-sm">
-                <i class="fas fa-edit"></i> Editar
-              </button>
-            
-              <button (click)="deleteClient(client)" class="btn btn-danger btn-sm">
-                <i class="fas fa-trash-alt"></i> Eliminar
-              </button>
-            </td>
-          </tr>
-          }
-        </tbody>
-      </table>
-    </div>
-  } @else {
-    <div class="no-clients">
-      <i class="fas fa-user-slash"></i>
-      <h3>No hay clientes registrados</h3>
-      <button class="btn-yellow" (click)="showForm = true">
-        <i class="fas fa-plus"></i> Agregar Primer Cliente
-      </button>
+  <!-- Modal del formulario para registrar/editar clientes -->
+  @if (showForm) {
+    <div class="modal-overlay">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>{{ editingClientId ? 'Editar cliente' : 'Nuevo cliente' }}</h3>
+          <button class="close-button" (click)="closeForm()">×</button>
+        </div>
+        <form (ngSubmit)="addClient()" class="form-modal">
+          <input type="text" placeholder="Nombre" [(ngModel)]="newClient.nombre" name="nombre" required>
+          <input type="text" placeholder="Teléfono" [(ngModel)]="newClient.telefono" name="telefono" required>
+          <input type="email" placeholder="Correo" [(ngModel)]="newClient.correo" name="correo" required>
+          <input type="text" placeholder="Dirección" [(ngModel)]="newClient.direccion" name="direccion" required>
+          <input type="number" placeholder="Edad" [(ngModel)]="newClient.edad" name="edad" required>
+        
+          <select [(ngModel)]="newClient.sexo" name="sexo" required>
+            <option value="" disabled selected>Sexo</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option>
+          </select>
+
+          <!-- Asistencia a eventos -->
+          <select [(ngModel)]="newClient.asistenciaEventos" name="asistenciaEventos" required>
+            <option value="" disabled selected>Frecuencia de asistencia</option>
+            @for (option of asistenciaOptions; track option) {
+              <option [value]="option">{{option}}</option>
+            }
+          </select>
+
+          <input type="text" placeholder="Nivel de estudios" [(ngModel)]="newClient.nivelEstudios" name="nivelEstudios" required>
+          <input type="text" placeholder="Ocupación" [(ngModel)]="newClient.ocupacion" name="ocupacion" required>
+
+          <!-- Historial de compras -->
+          <input
+            type="text"
+            placeholder="Historial de compras (ej. $250, $300)"
+            (change)="onComprasInputChange($event)"
+            name="historialCompras"
+            pattern="(\s*\$?\d+(\.\d{1,2})?\s*,?)+"
+            required
+          >
+
+          <!-- Participación en promociones -->
+          <select [(ngModel)]="newClient.promociones" name="promociones" required>
+            <option value="" disabled selected>Participaciones en promociones</option>
+            @for (option of promocionesOptions; track option) {
+              <option [value]="option">{{option}}</option>
+            }
+          </select>
+
+          <div class="form-buttons">
+            <button type="button" (click)="closeForm()">Cancelar</button>
+            <button type="submit">{{ editingClientId ? 'Guardar' : 'Agregar' }}</button>
+          </div>
+        </form>
+      </div>
     </div>
   }
-</div>
+
+  <!-- Tabla Rediseñada -->
+  <div class="modern-table-container">
+    @if (clients.length > 0) {
+      <div class="table-wrapper">
+        <table class="modern-table">
+          <thead>
+            <tr>
+              <th width="50px">#</th>
+              <th>Información Básica</th>
+              <th>Contacto</th>
+              <th>Detalles</th>
+              <th>Historial</th>
+              <th>Participación</th>
+              <th width="120px">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (client of clients; track client.id; let i = $index) {
+            <tr>
+              <td class="index">{{i + 1}}</td>
+              
+              <td class="client-main">
+                <div class="client-name">{{client.nombre}}</div>
+                <div class="client-age-sex">{{client.edad}} años • {{client.sexo}}</div>
+              </td>
+              
+              <td class="client-contact">
+                <div><i class="fas fa-phone"></i> {{client.telefono}}</div>
+                <div><i class="fas fa-envelope"></i> {{client.correo}}</div>
+                <div><i class="fas fa-map-marker-alt"></i> {{client.direccion}}</div>
+              </td>
+              
+              <td class="client-details">
+                <div><strong>Estudios:</strong> {{client.nivelEstudios}}</div>
+                <div><strong>Ocupación:</strong> {{client.ocupacion}}</div>
+              </td>
+              
+              <td class="client-history">
+                <div class="total-spent">${{getTotalCompras(client)}} total</div>
+              </td>
+              
+              <td class="client-engagement">
+                <span class="attendance-tag">{{client.asistenciaEventos}}</span>
+                <span class="promo-tag">{{client.promociones}}</span>
+                <div class="loyalty-level" [class]="'level-' + client.nivelLealtad.toLowerCase()">
+                  <i class="fas fa-star"></i> {{client.nivelLealtad}}
+                </div>
+              </td>
+              
+              <td data-label="Acciones" class="actions-cell">
+                <button (click)="editClient(client)" class="btn btn-warning btn-sm">
+                  <i class="fas fa-edit"></i> Editar
+                </button>
+              
+                <button (click)="deleteClient(client)" class="btn btn-danger btn-sm">
+                  <i class="fas fa-trash-alt"></i> Eliminar
+                </button>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    } @else {
+      <div class="no-clients">
+        <i class="fas fa-user-slash"></i>
+        <h3>No hay clientes registrados</h3>
+        <button class="btn-yellow" (click)="showForm = true">
+          <i class="fas fa-plus"></i> Agregar Primer Cliente
+        </button>
+      </div>
+    }
+  </div>

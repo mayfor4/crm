@@ -1,114 +1,207 @@
-<div class="cotizacion-container">
-  <h2><fa-icon [icon]="faPlus"></fa-icon> Selecciona un tipo de cotización</h2>
 
-  <div class="cotizacion-tabs">
+<div class="quote-system">
+  <div class="quote-header">
+    <h2><i class="fas fa-file-invoice-dollar"></i> Cotizaciones para Eventos</h2>
+    <p>Selecciona el tipo de servicio que necesitas cotizar</p>
+  </div>
+
+  <div class="quote-tabs">
     <button 
       [class.active]="tipoSeleccionado === 'bebidas'" 
-      (click)="seleccionarTipo('bebidas')">
-      <fa-icon [icon]="faChevronDown"></fa-icon> Suministro de Bebidas
+      (click)="seleccionarTipo('bebidas')"
+      class="tab-button">
+      <i class="fas fa-glass-cheers"></i> Suministro de Bebidas
     </button>
+    
     <button 
       [class.active]="tipoSeleccionado === 'artistas'" 
-      (click)="seleccionarTipo('artistas')">
-      <fa-icon [icon]="faChevronUp"></fa-icon> Contratación de Artistas
+      (click)="seleccionarTipo('artistas')"
+      class="tab-button">
+      <i class="fas fa-music"></i> Contratación de Artistas
+
     </button>
   </div>
 
   @if (tipoSeleccionado === 'bebidas') {
-    <div class="cotizacion-form">
-      <h3><fa-icon [icon]="faPlus"></fa-icon> Cotización de Suministro de Bebidas</h3>
-      <form>
-        <label>Proveedor*</label>
-        <select required>
-          <option value="" disabled selected>Seleccione un proveedor</option>
-          <option value="Modelo">Modelo</option>
-          <option value="Elite">Elite </option>
-          <option value="Victoria">Victoria</option>
-        </select>
 
-        <label>Tipo de Producto*</label>
-        <select required>
-          <option value="" disabled selected>Seleccione un tipo</option>
-          <option value="lotes">Lotes de botellas un mix</option>
-          <option value="paquetes">Paquetes promocionales</option>
-          <option value="descuentos">Descuentos por volumen o cajas</option>
-        </select>
-
-        <label>Cantidad*</label>
-        <input type="number" placeholder="Cantidad" required>
-
-        <label>Ubicación del evento*</label>
-        <input type="text" placeholder="Ejemplo: Salón XYZ, CDMX" required>
-
-        <label>Horario del evento*</label>
-        <input type="time" required>
-
-        <label>Servicios Adicionales</label>
-        <div class="servicios-adicionales">
-          <label><input type="checkbox"> Renta de equipo de sonido</label>
-          <label><input type="checkbox"> Iluminación profesional</label>
-          <label><input type="checkbox"> Seguridad privada</label>
-          <label><input type="checkbox"> Catering especializado</label>
-          <label><input type="checkbox"> Meseros y servicio de bar</label>
-          <label><input type="checkbox"> Transportación y logística</label>
+    <div class="quote-form-container">
+      <div class="form-header">
+        <h3><i class="fas fa-glass-cheers"></i> Cotización de Bebidas</h3>
+        <p>Complete los detalles para su evento</p>
+      </div>
+      
+      <form class="quote-form">
+        <div class="form-group">
+          <label><i class="fas fa-truck"></i> Proveedor*</label>
+          <select class="form-input" required>
+            <option value="" disabled selected>Seleccione un proveedor</option>
+            <option value="Modelo">Modelo</option>
+            <option value="Elite">Elite</option>
+            <option value="Victoria">Victoria</option>
+          </select>
         </div>
 
-        <label>Observaciones</label>
-        <textarea placeholder="Detalles adicionales..."></textarea>
+        <div class="form-group">
+          <label><i class="fas fa-wine-bottle"></i> Tipo de Producto*</label>
+          <select class="form-input" required>
+            <option value="" disabled selected>Seleccione un tipo</option>
+            <option value="lotes">Lotes de botellas (mix)</option>
+            <option value="paquetes">Paquetes promocionales</option>
+            <option value="descuentos">Descuentos por volumen</option>
+          </select>
+        </div>
 
-        <button type="submit">
-          <fa-icon [icon]="faPlus"></fa-icon> Solicitar Cotización
+        <div class="form-row">
+          <div class="form-group">
+            <label><i class="fas fa-cubes"></i> Cantidad*</label>
+            <input type="number" class="form-input" placeholder="Ej: 500" required>
+          </div>
+          
+          <div class="form-group">
+            <label><i class="far fa-clock"></i> Horario*</label>
+            <input type="time" class="form-input" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label><i class="fas fa-map-marker-alt"></i> Ubicación*</label>
+          <input type="text" class="form-input" placeholder="El FORO Concert HALL" required>
+        </div>
+
+        <div class="form-group">
+          <label><i class="fas fa-plus-circle"></i> Servicios Adicionales</label>
+          <div class="services-grid">
+            <label class="service-option">
+              <input type="checkbox">
+              <span><i class="fas fa-volume-up"></i> Equipo de sonido</span>
+            </label>
+            <label class="service-option">
+              <input type="checkbox">
+              <span><i class="fas fa-lightbulb"></i> Iluminación</span>
+            </label>
+            <label class="service-option">
+              <input type="checkbox">
+              <span><i class="fas fa-shield-alt"></i> Seguridad</span>
+            </label>
+            <label class="service-option">
+              <input type="checkbox">
+              <span><i class="fas fa-utensils"></i> Catering</span>
+            </label>
+            <label class="service-option">
+              <input type="checkbox">
+              <span><i class="fas fa-user-tie"></i> Meseros</span>
+            </label>
+            <label class="service-option">
+              <input type="checkbox">
+              <span><i class="fas fa-truck-moving"></i> Transporte</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label><i class="fas fa-comment-alt"></i> Observaciones</label>
+          <textarea class="form-input" rows="3" placeholder="Detalles importantes..."></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          <i class="fas fa-paper-plane"></i> Solicitar Cotización
+   
         </button>
       </form>
     </div>
   }
 
   @if (tipoSeleccionado === 'artistas') {
-    <div class="cotizacion-form">
-      <h3><fa-icon [icon]="faPlus"></fa-icon> Cotización de Contratación de Artistas</h3>
-      <form>
-        <label>Proveedor*</label>
-        <select required>
-          <option value="" disabled selected>Seleccione un proveedor</option>
-          <option value="Bandamax">Bandamax</option>
-          <option value="Sony Music">Sony Music</option>
-          <option value="EDC">EDC</option>
-        </select>
 
-        <label>Tipo de Servicio*</label>
-        <select required>
-          <option value="" disabled selected>Seleccione un tipo</option>
-          <option value="dj">DJ</option>
-          <option value="banda">Banda en vivo</option>
-          <option value="espectaculo">Espectáculo en vivo</option>
-        </select>
-
-        <label>Presupuesto*</label>
-        <input type="number" placeholder="Ingrese su presupuesto" required>
-
-        <label>Disponibilidad*</label>
-        <input type="date" required>
-
-        <label>Ubicación del evento*</label>
-        <input type="text" placeholder="Ejemplo: Teatro Nacional, CDMX" required>
-
-        <label>Servicios Adicionales</label>
-        <div class="servicios-adicionales">
-          <label><input type="checkbox"> Renta de equipo de sonido</label>
-          <label><input type="checkbox"> Iluminación profesional</label>
-          <label><input type="checkbox"> Seguridad privada</label>
-          <label><input type="checkbox"> Catering especializado</label>
-          <label><input type="checkbox"> Escenografía y efectos especiales</label>
-          <label><input type="checkbox"> Producción audiovisual</label>
+    <div class="quote-form-container">
+      <div class="form-header">
+        <h3><i class="fas fa-music"></i> Cotización de Artistas</h3>
+        <p>Complete los detalles para la contratación artística</p>
+      </div>
+      
+      <form class="quote-form">
+        <div class="form-group">
+          <label><i class="fas fa-record-vinyl"></i> Proveedor*</label>
+          <select class="form-input" required>
+            <option value="" disabled selected>Seleccione un proveedor</option>
+            <option value="Bandamax">Bandamax</option>
+            <option value="Sony Music">Sony Music</option>
+            <option value="EDC">EDC</option>
+          </select>
         </div>
-
-        <label>Observaciones</label>
-        <textarea placeholder="Detalles adicionales..."></textarea>
-
-        <button type="submit">
-          <fa-icon [icon]="faPlus"></fa-icon> Solicitar Cotización
+  
+        <div class="form-group">
+          <label><i class="fas fa-guitar"></i> Tipo de Servicio*</label>
+          <select class="form-input" required>
+            <option value="" disabled selected>Seleccione un tipo</option>
+            <option value="dj">DJ</option>
+            <option value="banda">Banda en vivo</option>
+            <option value="espectaculo">Espectáculo en vivo</option>
+          </select>
+        </div>
+  
+        <div class="form-row">
+          <div class="form-group">
+            <label><i class="fas fa-money-bill-wave"></i> Presupuesto*</label>
+            <div class="input-with-symbol">
+              <span class="symbol">$</span>
+              <input type="number" class="form-input" placeholder="Ej: 25000" required>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label><i class="far fa-calendar-alt"></i> Disponibilidad*</label>
+            <input type="date" class="form-input" required>
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label><i class="fas fa-map-marked-alt"></i> Ubicación*</label>
+          <input type="text" class="form-input" placeholder="El FORO Concert HALL" required>
+        </div>
+  
+        <div class="form-group">
+          <label><i class="fas fa-star"></i> Servicios Adicionales</label>
+          <div class="services-grid">
+            <label class="service-option">
+              <input type="checkbox">
+              <span><i class="fas fa-volume-up"></i> Equipo de sonido</span>
+            </label>
+            <label class="service-option">
+              <input type="checkbox">
+              <span><i class="fas fa-lightbulb"></i> Iluminación</span>
+            </label>
+            <label class="service-option">
+              <input type="checkbox">
+              <span><i class="fas fa-shield-alt"></i> Seguridad</span>
+            </label>
+            <label class="service-option">
+              <input type="checkbox">
+              <span><i class="fas fa-utensils"></i> Catering</span>
+            </label>
+            <label class="service-option">
+              <input type="checkbox">
+              <span><i class="fas fa-theater-masks"></i> Escenografía</span>
+            </label>
+            <label class="service-option">
+              <input type="checkbox">
+              <span><i class="fas fa-video"></i> Producción AV</span>
+            </label>
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label><i class="fas fa-comment-dots"></i> Observaciones</label>
+          <textarea class="form-input" rows="3" placeholder="Artistas preferidos, duración del show, requerimientos técnicos..."></textarea>
+        </div>
+  
+        <button type="submit" class="submit-btn">
+          <i class="fas fa-paper-plane"></i> Solicitar Cotización
+   
         </button>
       </form>
     </div>
   }
+
 </div>
+

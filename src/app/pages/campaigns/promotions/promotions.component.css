@@ -1,153 +1,180 @@
 .container {
-    padding: 20px;
-    background-color: #ffffff; /* Fondo blanco para toda la página */
-    border-radius: 10px; /* Bordes redondeados */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-    margin: 20px auto; /* Centrar el contenedor */
-    max-width: 800px; /* Ancho máximo del contenedor */
+  padding: 20px;
+  background-color: #ffffff; /* Fondo blanco para toda la página */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  margin: 20px auto; /* Centrar el contenedor */
+  max-width: 800px; /* Ancho máximo del contenedor */
+}
+
+h1, h2 {
+  text-align: center;
+  color: #000000; /* Color azul para los títulos */
+  margin-bottom: 20px;
+}
+
+.form-container {
+  margin-bottom: 20px;
+  background-color: #f9f9f9; /* Fondo claro para el formulario */
+  padding: 20px;
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  color: #333333; /* Color de etiqueta más oscuro */
+  margin-bottom: 5px;
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #cccccc; /* Borde gris claro */
+  border-radius: 5px; /* Bordes redondeados */
+  box-sizing: border-box; /* Incluir padding y borde en el ancho y alto */
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: #1f6feb; /* Borde azul en enfoque */
+  outline: none; /* Quitar el borde de enfoque por defecto */
+}
+
+button {
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+
+button:hover {
+  background: #3b82f6;
+  transform: translateY(-2px); /* Efecto de elevación en hover */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  border-radius: 10px; /* Bordes redondeados para la tabla */
+  overflow: hidden; /* Para que los bordes redondeados se apliquen a las celdas */
+}
+
+/* Reemplaza esta regla */
+table, th, td {
+    border: 1px solid #1f6feb;
   }
   
-  h1, h2 {
-    text-align: center;
-    color: #000000; /* Color azul para los títulos */
-    margin-bottom: 20px;
-  }
-  
-  .form-container {
-    margin-bottom: 20px;
-    background-color: #f9f9f9; /* Fondo claro para el formulario */
-    padding: 20px;
-    border-radius: 10px; /* Bordes redondeados */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  label {
-    display: block;
-    color: #333333; /* Color de etiqueta más oscuro */
-    margin-bottom: 5px;
-  }
-  
-  input, textarea, select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #cccccc; /* Borde gris claro */
-    border-radius: 5px; /* Bordes redondeados */
-    box-sizing: border-box; /* Incluir padding y borde en el ancho y alto */
-  }
-  
-  input:focus, textarea:focus, select:focus {
-    border-color: #1f6feb; /* Borde azul en enfoque */
-    outline: none; /* Quitar el borde de enfoque por defecto */
-  }
-  
-  button {
-    background: #1f6feb;
-    color: #ffffff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.3s;
-  }
-  
-  button:hover {
-    background: #3b82f6;
-    transform: translateY(-2px); /* Efecto de elevación en hover */
-  }
-  
+  /* Por esta */
   table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    border-radius: 10px; /* Bordes redondeados para la tabla */
-    overflow: hidden; /* Para que los bordes redondeados se apliquen a las celdas */
+    border: 1px solid black;
   }
-  
-  /* Reemplaza esta regla */
-  table, th, td {
-      border: 1px solid #1f6feb;
-    }
-    
-    /* Por esta */
-    table {
-      border: 1px solid black;
-    }
-    th, td {
-      border: 1px solid black;
-    }
-    td.actions {
-      border: none;
-    }
-  
   th, td {
-    padding: 12px; /* Espaciado más cómodo */
-    text-align: left;
-    color: #333333; /* Color de texto más oscuro */
+    border: 1px solid black;
   }
-  
-  th {
-    background: #ffdd00e4;
-    color: black;
-    text-align: center;
-  }
-  
-  tbody tr:nth-child(even) {
-    background-color: #f2f2f2; /* Fondo gris claro para filas pares */
-  }
-  
-  tbody tr:nth-child(odd) {
-    background-color: #ffffff; /* Fondo blanco para filas impares */
-  }
-  
-  tbody tr:hover {
-    background-color: #e0f3ff; /* Fondo azul claro en hover */
-    color: #333333;
-  }
-  
-  .actions {
-    display: flex;
-    justify-content: space-between; /* Espacio entre los botones */
-  }
-  
-  .actions button {
-    flex: 1;
-    margin-right: 5px; 
-    padding: 5px 10px; 
-    font-size: 14px; 
-  }
-  
-  .actions button:last-child {
-    margin-right: 0; 
-  }
-  
-  .actions .delete-button {
-    background: #e74c3c; 
-  }
-  
-  .actions .delete-button:hover {
-    background: #c0392b; 
-  } 
-
-  .agregar button{
-    background-color: #12da22;
-  }
-
-  button.add-update-button {
-    background: #28a745; 
-    color: #ffffff;
+  td.actions {
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.3s;
   }
-  
-  button.add-update-button:hover {
-    background: #218838;
-    transform: translateY(-2px); 
-  }
+
+th, td {
+  padding: 12px; /* Espaciado más cómodo */
+  text-align: left;
+  color: #333333; /* Color de texto más oscuro */
+}
+
+th {
+  background: #ffdd00e4;
+  color: black;
+  text-align: center;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2; /* Fondo gris claro para filas pares */
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #ffffff; /* Fondo blanco para filas impares */
+}
+
+tbody tr:hover {
+  background-color: #e0f3ff; /* Fondo azul claro en hover */
+  color: #333333;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between; /* Espacio entre los botones */
+}
+
+.actions button {
+  flex: 1;
+  margin-right: 5px; 
+  padding: 5px 10px; 
+  font-size: 14px; 
+}
+
+.actions button:last-child {
+  margin-right: 0; 
+}
+
+.actions .delete-button {
+  background: #e74c3c; 
+}
+
+.actions .delete-button:hover {
+  background: #c0392b; 
+} 
+
+.agregar button{
+  background-color: #12da22;
+}
+
+button.add-update-button {
+  background: #28a745; 
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+
+button.add-update-button:hover {
+  background: #218838;
+  transform: translateY(-2px); 
+}
+
+.actions {
+  display: flex;  /* Asegura que los botones estén en una fila */
+  justify-content: flex-start; /* Alinea los botones al principio */
+  gap: 10px; /* Añade espacio entre los botones */
+}
+
+.actions .btn {
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 14px; /* Tamaño de fuente consistente */
+}
+
+.actions .delete-button {
+  background-color: #e74c3c; /* Rojo para el botón de eliminar */
+}
+
+.actions .delete-button:hover {
+  background-color: #c0392b; /* Rojo más oscuro en hover */
+}
+
+.actions .btn:hover {
+  transform: translateY(-2px); /* Efecto de elevación en hover */
+}
+
+.actions .btn:focus {
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Efecto de foco */
+}
