@@ -1,52 +1,41 @@
-<nav class="sidebar">
-  <div class="logo-container">
-    <a routerLink="/home">
-      <img class="company-logo" src="foro-logo.png" alt="FORS CONCERT HALL">
-    </a>
-  </div>
-  <div class="menu-content">
-    <ul class="nav flex-column">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/home">
-          <i class="fas fa-home"></i> Home
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/campaigns">
-          <i class="fas fa-bullhorn"></i> Campañas
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/clients">
-          <i class="fas fa-address-book"></i> Clientes
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/email">
-          <i class="fas fa-envelope"></i> Correos
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/events">
-          <i class="fas fa-calendar-alt"></i> Eventos
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/cotizacion">
-          <i class="fas fa-file-alt"></i> Cotización
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/mensajeria">
-          <i class="fas fa-envelope"></i> Mensajería
-        </a>
-      </li>
-    </ul>
-  </div>
+@if (this.user()) {
+  <nav class="sidebar">
+    <div class="logo-container">
+      <a routerLink="/home">
+        <img class="company-logo" src="foro-logo.png" alt="FORS CONCERT HALL">
+      </a>
+    </div>
+    <div class="menu-content">
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home"><i class="fas fa-home"></i> Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/campaigns"><i class="fas fa-bullhorn"></i> Campañas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/clients"><i class="fas fa-address-book"></i> Clientes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/email"><i class="fas fa-envelope"></i> Correos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/events"><i class="fas fa-calendar-alt"></i> Eventos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/cotizacion"><i class="fas fa-file-alt"></i> Cotización</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/mensajeria"><i class="fas fa-envelope"></i> Mensajería</a>
+        </li>
+      </ul>
+    </div>
   
-  <div class="logout-section">
-    <button type="button" class="logout-btn" (click)="salir()">
-      <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
-    </button>
-  </div>
-</nav>
+    <div class="logout-section">
+      <button type="button" class="logout-btn" (click)="salir()">
+        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+      </button>
+    </div>
+  </nav>
+  }
+  
